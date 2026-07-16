@@ -15,7 +15,7 @@ export default function CollectionHero() {
         className="object-cover"
         sizes="100vw"
         priority
-        quality={90}
+        quality={80}
       />
     </section>
   );

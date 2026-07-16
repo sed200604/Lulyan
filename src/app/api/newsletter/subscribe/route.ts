@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { WelcomeDiscountEmail } from '@/emails/WelcomeDiscount';
+import { supabase } from '@/lib/supabase';
 
 // Generate a unique 8-char discount code
 function generateCode(): string {
@@ -11,8 +12,16 @@ function generateCode(): string {
 }
 
 export async function POST(req: Request) {
-  const resend = new Resend(process.env.RESEND_API_KEY!);
   try {
+    if (!process.env.RESEND_API_KEY) {
+      console.error('[newsletter/subscribe] RESEND_API_KEY is missing');
+      return NextResponse.json(
+        { error: "La configuration d'email n'est pas prête." },
+        { status: 500 }
+      );
+    }
+
+    const resend = new Resend(process.env.RESEND_API_KEY.trim());
     const { email } = await req.json();
 
     // Basic validation
@@ -22,6 +31,15 @@ export async function POST(req: Request) {
 
     const normalizedEmail = email.trim().toLowerCase();
     
+    // Insert into Supabase
+    const { error: dbError } = await supabase
+      .from('newsletter_subscribers')
+      .insert({ email: normalizedEmail, source: 'welcome_popup' });
+      
+    if (dbError && dbError.code !== '23505') { // 23505 is unique constraint violation (already subscribed)
+      console.error('[newsletter/subscribe] supabase error:', dbError);
+    }
+
     // Bypass Supabase: Generate unique discount code locally
     const code = generateCode();
 

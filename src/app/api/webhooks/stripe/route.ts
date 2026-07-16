@@ -2,10 +2,11 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { Resend } from 'resend';
 import { OrderConfirmationEmail } from '@/emails/OrderConfirmation';
+import { supabase } from '@/lib/supabase';
 
 export async function POST(req: Request) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-04-10' as any });
-  const resend = new Resend(process.env.RESEND_API_KEY!);
+  const resend = new Resend(process.env.RESEND_API_KEY?.trim());
   const body = await req.text();
   const signature = req.headers.get('stripe-signature');
 
@@ -25,6 +26,20 @@ export async function POST(req: Request) {
 
   const pi = event.data.object as Stripe.PaymentIntent;
   const metadata = pi.metadata || {};
+
+  // Update Supabase order status
+  try {
+    const { error: updateError } = await supabase
+      .from('orders')
+      .update({ status: 'paid' })
+      .eq('stripe_payment_intent', pi.id);
+      
+    if (updateError) {
+      console.error('[webhook] supabase update error:', updateError);
+    }
+  } catch (dbErr) {
+    console.error('[webhook] supabase try-catch error:', dbErr);
+  }
 
   const customerEmail = metadata.customerEmail;
   if (!customerEmail || customerEmail === 'unknown') {

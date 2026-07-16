@@ -82,7 +82,7 @@ export default function RootLayout({
         <AnalyticsScripts />
         <Script
           id="meta-pixel-init"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?

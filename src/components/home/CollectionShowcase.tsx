@@ -16,8 +16,7 @@ export default function CollectionShowcase() {
           fill
           className="object-cover object-center"
           sizes="100vw"
-          quality={100}
-          priority
+          quality={80}
         />
         {/* Subtle bottom gradient to ensure text readability if needed */}
         <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />

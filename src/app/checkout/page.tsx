@@ -122,11 +122,37 @@ export default function CheckoutPage() {
   const [clientSecret, setClientSecret] = useState<string>('');
   const [fetchError, setFetchError] = useState<string | null>(null);
   const { items, isFreeShipping, promoCode } = useCartStore();
-  const { deliveryMethod } = useCheckoutStore();
+  const { deliveryMethod, contactInfo, shippingAddress } = useCheckoutStore();
 
   useEffect(() => {
     setIsHydrated(true);
   }, []);
+
+  // Sync cart and customer data for abandoned carts / lead capture
+  useEffect(() => {
+    if (!isHydrated || items.length === 0) return;
+    if (!contactInfo.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactInfo.email)) return;
+
+    const timeoutId = setTimeout(() => {
+      const shippingAmount = isFreeShipping() ? 0 : (deliveryMethod === 'express' ? 9.90 : 4.90);
+      
+      fetch('/api/checkout/sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items,
+          shippingAmount,
+          customerEmail: contactInfo.email,
+          customerDetails: {
+            ...contactInfo,
+            ...shippingAddress
+          }
+        })
+      }).catch(err => console.error('Failed to sync checkout:', err));
+    }, 2000); // 2-second debounce
+
+    return () => clearTimeout(timeoutId);
+  }, [contactInfo, shippingAddress, items, deliveryMethod, isFreeShipping, isHydrated]);
 
   useEffect(() => {
     const fetchClientSecret = async () => {

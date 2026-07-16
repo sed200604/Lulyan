@@ -49,72 +49,75 @@ export async function POST(req: Request) {
       },
     });
 
-    // Bypass Supabase: we skip saving the order and order items to the database
-    // The webhook will now read from metadata directly.
-    /*
-    let customerId = null;
-    if (customerEmail) {
-      // Find customer
-      const { data: customer } = await supabase
-        .from('customers')
-        .select('id')
-        .eq('email', customerEmail)
-        .single();
-        
-      if (customer) {
-        customerId = customer.id;
-      } else if (customerDetails) {
-        // Create new customer
-        const { data: newCustomer, error: insertError } = await supabase
+    // Save the order to Supabase without blocking the checkout flow
+    try {
+      let customerId = null;
+      if (customerEmail) {
+        // Find customer
+        const { data: customer } = await supabase
           .from('customers')
-          .insert({
-            email: customerEmail,
-            first_name: customerDetails.firstName || '',
-            last_name: customerDetails.lastName || '',
-            phone: customerDetails.phone || null,
-            address: customerDetails.address1 || '',
-            address2: customerDetails.address2 || '',
-            city: customerDetails.city || '',
-            zip_code: customerDetails.zipCode || '',
-            country: customerDetails.country || ''
-          })
           .select('id')
+          .eq('email', customerEmail)
           .single();
           
-        if (newCustomer) {
-          customerId = newCustomer.id;
-        } else {
-          console.error('Failed to insert customer:', insertError);
+        if (customer) {
+          customerId = customer.id;
+        } else if (customerDetails) {
+          // Create new customer
+          const { data: newCustomer, error: insertError } = await supabase
+            .from('customers')
+            .insert({
+              email: customerEmail,
+              first_name: customerDetails.firstName || '',
+              last_name: customerDetails.lastName || '',
+              phone: customerDetails.phone || null,
+              address: customerDetails.address1 || '',
+              address2: customerDetails.address2 || '',
+              city: customerDetails.city || '',
+              zip_code: customerDetails.zipCode || '',
+              country: customerDetails.country || ''
+            })
+            .select('id')
+            .single();
+            
+          if (newCustomer) {
+            customerId = newCustomer.id;
+          } else {
+            console.error('Failed to insert customer:', insertError);
+          }
         }
       }
+
+      // Insert order
+      const { data: order, error: orderError } = await supabase
+        .from('orders')
+        .insert({
+          customer_id: customerId,
+          status: 'pending',
+          total_amount: totalAmount + shippingAmount,
+          stripe_payment_intent: paymentIntent.id
+        })
+        .select('id')
+        .single();
+
+      if (!orderError && order) {
+        // Insert order items
+        const orderItemsToInsert = items.map((item: any) => ({
+          order_id: order.id,
+          product_id: item.id,
+          size: item.size || null,
+          color: item.color || null,
+          quantity: item.quantity,
+          price: item.price
+        }));
+
+        await supabase.from('order_items').insert(orderItemsToInsert);
+      } else {
+        console.error('Failed to insert order:', orderError);
+      }
+    } catch (dbErr) {
+      console.error('Database error during checkout:', dbErr);
     }
-
-    // Insert order
-    const { data: order, error: orderError } = await supabase
-      .from('orders')
-      .insert({
-        customer_id: customerId,
-        status: 'pending',
-        total_amount: totalAmount + shippingAmount,
-        stripe_payment_intent: paymentIntent.id
-      })
-      .select('id')
-      .single();
-
-    if (!orderError && order) {
-      // Insert order items
-      const orderItemsToInsert = items.map((item: any) => ({
-        order_id: order.id,
-        product_id: item.id,
-        size: item.size,
-        color: item.color,
-        quantity: item.quantity,
-        price: item.price
-      }));
-
-      await supabase.from('order_items').insert(orderItemsToInsert);
-    }
-    */
 
     return NextResponse.json({ clientSecret: paymentIntent.client_secret });
   } catch (error: any) {

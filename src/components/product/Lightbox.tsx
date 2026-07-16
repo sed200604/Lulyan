@@ -94,7 +94,7 @@ export default function Lightbox({ images, initialIndex, onClose }: LightboxProp
               className="object-contain"
               sizes="100vw"
               priority
-              quality={100}
+              quality={80}
             />
           </div>
         </motion.div>

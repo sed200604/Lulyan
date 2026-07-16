@@ -18,7 +18,6 @@ export function ArticleCard({ post, featured = false }: ArticleCardProps) {
             fill
             sizes="100vw"
             className="object-cover"
-            priority
           />
         </div>
 
