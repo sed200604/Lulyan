@@ -1,0 +1,1 @@
+﻿export function StarRating() { return <div>StarRating Component</div>; }

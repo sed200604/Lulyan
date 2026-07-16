@@ -1,0 +1,1 @@
+﻿export function PriceDisplay() { return <div>PriceDisplay Component</div>; }

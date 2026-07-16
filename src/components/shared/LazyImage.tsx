@@ -1,0 +1,1 @@
+﻿export function LazyImage() { return <div>LazyImage Component</div>; }
