@@ -9,6 +9,8 @@ import { cn } from '@/lib/utils';
 import { Product } from '@/types/product';
 import { useWishlistStore } from '@/stores/wishlistStore';
 import { useEffect } from 'react';
+import { GiftEligibleBadge } from './GiftEligibleBadge';
+import { isGiftOfferActive } from '@/config/promotions';
 
 interface ProductCardProps {
   product: Product;
@@ -44,6 +46,7 @@ export function ProductCard({ product }: ProductCardProps) {
       <Link href={`/products/${product.slug}`} className="w-full">
         {/* Image Container */}
         <div className="relative aspect-[3/4] w-full bg-brand-cream-100 overflow-hidden mb-4 transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-medium">
+          {product.isGiftEligible && isGiftOfferActive() && <GiftEligibleBadge />}
           {/* Main Image */}
           <Image
             src={product.images[0].src}

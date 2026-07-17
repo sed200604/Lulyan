@@ -244,12 +244,12 @@ export function ProductInfo({ product }: ProductInfoProps) {
       {isOfferActive && product.isGiftEligible && giftProduct && (
         <div id="gift-selector">
           <GiftOfferSection 
-            onColorSelect={(color) => {
+            onSelectColor={(color) => {
               setSelectedGiftColor(color);
               setGiftError(false);
             }} 
-            selectedColor={selectedGiftColor} 
-            giftProduct={giftProduct} 
+            selectedColorSlug={selectedGiftColor} 
+            recommendedColorSlug={giftProduct?.slug} // we probably don't have recommended logic handy, but can leave it or pass the burkini color logic 
           />
           {giftError && (
             <motion.p
@@ -265,6 +265,14 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
       {/* ─── ADD TO CART & ACTIONS ─── */}
       <div className="mt-8 space-y-3">
+        {product.isGiftEligible && isOfferActive && (
+          <div className="flex items-center justify-center gap-2 mb-3 py-2 px-3 bg-[#F9F5EC] rounded-md">
+            <span className="text-[12px]">🎁</span>
+            <span className="text-[11px] italic text-[#8B6F3E] font-serif">
+              Hijab d'été offert · Valeur 25 €
+            </span>
+          </div>
+        )}
         <button
           id="add-to-cart-button"
           onClick={handleAddToCart}

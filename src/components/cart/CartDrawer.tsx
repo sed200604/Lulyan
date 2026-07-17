@@ -7,6 +7,8 @@ import { useCartStore } from '@/stores/cartStore';
 import { CartItem } from './CartItem';
 import { CartSummary } from './CartSummary';
 import { formatEUR } from '@/lib/utils';
+import { EmptyCartWithOffer } from './EmptyCartWithOffer';
+import { isGiftOfferActive } from '@/config/promotions';
 
 export function CartDrawer() {
   const { isOpen, setIsOpen, items, amountToFreeShipping } = useCartStore();
@@ -78,15 +80,20 @@ export function CartDrawer() {
             {/* Content */}
             <div className="flex-1 overflow-y-auto hide-scrollbar flex flex-col">
               {isCartEmpty ? (
-                <div className="flex-1 flex flex-col items-center justify-center p-6 text-center">
-                  <p className="font-montserrat text-brand-black-400 mb-6">Votre panier est vide</p>
-                  <button 
-                    onClick={() => setIsOpen(false)}
-                    className="w-full max-w-[280px] h-[52px] border border-brand-black-500 text-brand-black-500 font-montserrat font-bold text-sm tracking-wider hover:bg-brand-black-500 hover:text-brand-cream-500 transition-colors flex items-center justify-center"
-                  >
-                    CONTINUER MES ACHATS
-                  </button>
-                </div>
+                isGiftOfferActive() ? (
+                  <EmptyCartWithOffer />
+                ) : (
+                  <div className="flex-1 flex flex-col items-center justify-center p-6 text-center">
+                    <p className="font-montserrat text-brand-black-400 mb-6">Votre panier est vide</p>
+                    <button 
+                      data-cart-close
+                      onClick={() => setIsOpen(false)}
+                      className="w-full max-w-[280px] h-[52px] border border-brand-black-500 text-brand-black-500 font-montserrat font-bold text-sm tracking-wider hover:bg-brand-black-500 hover:text-brand-cream-500 transition-colors flex items-center justify-center"
+                    >
+                      CONTINUER MES ACHATS
+                    </button>
+                  </div>
+                )
               ) : (
                 <div className="p-6 flex flex-col">
                   {/* Items */}

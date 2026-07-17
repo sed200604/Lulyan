@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { MobileVideoHero } from '@/components/hero/MobileVideoHero';
+import { GiftOfferHomeCallout } from '@/components/home/GiftOfferHomeCallout';
 import CollectionShowcase from '@/components/home/CollectionShowcase';
 import { FeaturedProducts } from '@/components/home/FeaturedProducts';
 import { BrandStory } from '@/components/home/BrandStory';
@@ -52,6 +53,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <StructuredData data={[orgSchema, websiteSchema]} />
       <MobileVideoHero />
+      <GiftOfferHomeCallout />
       <CollectionShowcase />
       <FeaturedProducts />
       <BrandStory />
