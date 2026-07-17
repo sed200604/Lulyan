@@ -3,6 +3,7 @@ import { Minus, Plus, X } from 'lucide-react';
 import { useCartStore } from '@/stores/cartStore';
 import { CartItem as CartItemType } from '@/types/product';
 import { formatEUR } from '@/lib/utils';
+import { getHijabByColor } from '@/data/hijab-gift';
 
 interface CartItemProps {
   item: CartItemType;
@@ -15,7 +16,55 @@ export function CartItem({ item, variant = 'drawer' }: CartItemProps) {
   const handleDecrease = () => updateQuantity(item.id, item.quantity - 1);
   const handleIncrease = () => updateQuantity(item.id, item.quantity + 1);
 
+  const hijabData = item.isGift ? getHijabByColor(item.color || 'champagne') : null;
+
   if (variant === 'drawer') {
+    if (item.isGift) {
+      return (
+        <div className="mt-4 pl-4 border-l-2 border-[#B8956A]/30 mb-6">
+          <div className="flex items-center gap-2 mb-3">
+            <div className="h-px flex-1 bg-[#B8956A]/20" />
+            <span className="text-[9px] tracking-[0.25em] uppercase text-[#B8956A] font-medium whitespace-nowrap">
+              🎁 Offert avec votre burkini
+            </span>
+            <div className="h-px flex-1 bg-[#B8956A]/20" />
+          </div>
+          <div className="flex gap-4">
+            {hijabData && (
+              <div className="relative w-14 h-[72px] flex-shrink-0 rounded overflow-hidden border border-neutral-200 bg-neutral-50">
+                <Image
+                  src={hijabData.imageUrl}
+                  alt={hijabData.altText}
+                  fill
+                  sizes="56px"
+                  placeholder="blur"
+                  blurDataURL={hijabData.blurDataURL}
+                  quality={80}
+                  className="object-cover"
+                />
+              </div>
+            )}
+            <div className="flex-1">
+              <h4 className="font-serif text-[14px] text-[#2A2A2A]">
+                Hijab d'Été
+              </h4>
+              <p className="text-[12px] italic text-neutral-500 font-serif">
+                Assorti · {hijabData?.name}
+              </p>
+            </div>
+            <div className="text-right">
+              <p className="text-[13px] font-medium text-[#166534]">
+                OFFERT
+              </p>
+              <p className="text-[11px] text-neutral-400 line-through">
+                {formatEUR(item.originalValue || 25)}
+              </p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="flex gap-4 py-6 border-b border-brand-black-100/50">
         <div className="relative w-20 h-[100px] flex-shrink-0 bg-brand-cream-200">
@@ -46,47 +95,28 @@ export function CartItem({ item, variant = 'drawer' }: CartItemProps) {
           </div>
           
           <div className="flex justify-between items-end mt-4">
-            {item.isGift ? (
-              <div className="flex flex-col gap-1 w-full mt-2">
-                <div className="w-full h-px bg-brand-black-100/50 mb-2"></div>
-                <div className="flex justify-between items-center w-full">
-                  <span className="text-xs font-medium text-brand-gold-500 italic">🎁 Offert avec votre burkini</span>
-                  <div className="flex items-center gap-2">
-                    <span className="font-montserrat text-sm text-brand-black-300 line-through">
-                      {(item.originalValue || 25).toFixed(2)} €
-                    </span>
-                    <span className="bg-[#E8F5E9] text-[#2E7D32] px-2 py-0.5 rounded text-[10px] font-bold tracking-wide">
-                      OFFERT
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <>
-                <div className="flex items-center border border-brand-black-200">
-                  <button
-                    onClick={handleDecrease}
-                    disabled={item.quantity <= 1}
-                    className="w-8 h-8 flex items-center justify-center text-brand-black-400 hover:text-brand-black-500 disabled:opacity-50 transition-colors"
-                  >
-                    <Minus className="w-3 h-3" />
-                  </button>
-                  <span className="w-8 text-center font-montserrat text-sm text-brand-black-500">
-                    {item.quantity}
-                  </span>
-                  <button
-                    onClick={handleIncrease}
-                    disabled={item.quantity >= 10}
-                    className="w-8 h-8 flex items-center justify-center text-brand-black-400 hover:text-brand-black-500 disabled:opacity-50 transition-colors"
-                  >
-                    <Plus className="w-3 h-3" />
-                  </button>
-                </div>
-                <span className="font-montserrat text-brand-black-500">
-                  {(item.price * item.quantity).toFixed(2)} €
-                </span>
-              </>
-            )}
+            <div className="flex items-center border border-brand-black-200">
+              <button
+                onClick={handleDecrease}
+                disabled={item.quantity <= 1}
+                className="w-8 h-8 flex items-center justify-center text-brand-black-400 hover:text-brand-black-500 disabled:opacity-50 transition-colors"
+              >
+                <Minus className="w-3 h-3" />
+              </button>
+              <span className="w-8 text-center font-montserrat text-sm text-brand-black-500">
+                {item.quantity}
+              </span>
+              <button
+                onClick={handleIncrease}
+                disabled={item.quantity >= 10}
+                className="w-8 h-8 flex items-center justify-center text-brand-black-400 hover:text-brand-black-500 disabled:opacity-50 transition-colors"
+              >
+                <Plus className="w-3 h-3" />
+              </button>
+            </div>
+            <span className="font-montserrat text-brand-black-500">
+              {formatEUR(item.price * item.quantity)}
+            </span>
           </div>
         </div>
       </div>
@@ -94,6 +124,52 @@ export function CartItem({ item, variant = 'drawer' }: CartItemProps) {
   }
 
   // Page variant
+  if (item.isGift) {
+    return (
+      <div className="mt-6 pl-6 border-l-2 border-[#B8956A]/30 mb-8">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="h-px flex-1 bg-[#B8956A]/20" />
+          <span className="text-xs tracking-[0.25em] uppercase text-[#B8956A] font-medium whitespace-nowrap">
+            🎁 Offert avec votre burkini
+          </span>
+          <div className="h-px flex-1 bg-[#B8956A]/20" />
+        </div>
+        <div className="flex gap-6">
+          {hijabData && (
+            <div className="relative w-20 h-[100px] flex-shrink-0 rounded overflow-hidden border border-neutral-200 bg-neutral-50">
+              <Image
+                src={hijabData.imageUrl}
+                alt={hijabData.altText}
+                fill
+                sizes="80px"
+                placeholder="blur"
+                blurDataURL={hijabData.blurDataURL}
+                quality={80}
+                className="object-cover"
+              />
+            </div>
+          )}
+          <div className="flex-1 py-2">
+            <h4 className="font-serif text-[18px] text-[#2A2A2A]">
+              Hijab d'Été
+            </h4>
+            <p className="text-[14px] italic text-neutral-500 font-serif mt-1">
+              Assorti · {hijabData?.name}
+            </p>
+          </div>
+          <div className="text-right py-2">
+            <p className="text-[15px] font-medium text-[#166534]">
+              OFFERT
+            </p>
+            <p className="text-[13px] text-neutral-400 line-through mt-1">
+              {formatEUR(item.originalValue || 25)}
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex gap-6 py-8 border-b border-brand-black-100/50">
       <div className="relative w-32 h-[160px] flex-shrink-0 bg-brand-cream-200">
@@ -123,58 +199,45 @@ export function CartItem({ item, variant = 'drawer' }: CartItemProps) {
             </div>
           </div>
           <span className="font-montserrat font-medium text-lg text-brand-black-500">
-            {(item.price * item.quantity).toFixed(2)} €
+            {formatEUR(item.price * item.quantity)}
           </span>
         </div>
         
         <div className="flex justify-between items-center mt-6">
-          {item.isGift ? (
-            <div className="flex flex-col gap-1 w-full">
-              <div className="flex justify-between items-center w-full">
-                <span className="text-sm font-medium text-brand-gold-500 italic">🎁 Offert avec votre burkini</span>
-                <span className="bg-[#E8F5E9] text-[#2E7D32] px-3 py-1 rounded text-xs font-bold tracking-wide">
-                  OFFERT
-                </span>
-              </div>
-            </div>
-          ) : (
-            <div className="flex items-center border border-brand-black-200">
-              <button
-                onClick={handleDecrease}
-                disabled={item.quantity <= 1}
-                className="w-10 h-10 flex items-center justify-center text-brand-black-400 hover:text-brand-black-500 disabled:opacity-50 transition-colors"
-              >
-                <Minus className="w-4 h-4" />
-              </button>
-              <input 
-                type="number"
-                value={item.quantity}
-                onChange={(e) => {
-                  const val = parseInt(e.target.value);
-                  if (!isNaN(val)) updateQuantity(item.id, val);
-                }}
-                min="1"
-                max="10"
-                className="w-12 h-10 text-center font-montserrat text-brand-black-500 border-none focus:ring-0 appearance-none bg-transparent"
-              />
-              <button
-                onClick={handleIncrease}
-                disabled={item.quantity >= 10}
-                className="w-10 h-10 flex items-center justify-center text-brand-black-400 hover:text-brand-black-500 disabled:opacity-50 transition-colors"
-              >
-                <Plus className="w-4 h-4" />
-              </button>
-            </div>
-          )}
-          {!item.isGift && (
+          <div className="flex items-center border border-brand-black-200">
             <button
-              onClick={() => removeItem(item.id)}
-              className="text-brand-black-300 hover:text-red-500 transition-colors p-2"
-              aria-label="Remove item"
+              onClick={handleDecrease}
+              disabled={item.quantity <= 1}
+              className="w-10 h-10 flex items-center justify-center text-brand-black-400 hover:text-brand-black-500 disabled:opacity-50 transition-colors"
             >
-              <X className="w-5 h-5" />
+              <Minus className="w-4 h-4" />
             </button>
-          )}
+            <input 
+              type="number"
+              value={item.quantity}
+              onChange={(e) => {
+                const val = parseInt(e.target.value);
+                if (!isNaN(val)) updateQuantity(item.id, val);
+              }}
+              min="1"
+              max="10"
+              className="w-12 h-10 text-center font-montserrat text-brand-black-500 border-none focus:ring-0 appearance-none bg-transparent"
+            />
+            <button
+              onClick={handleIncrease}
+              disabled={item.quantity >= 10}
+              className="w-10 h-10 flex items-center justify-center text-brand-black-400 hover:text-brand-black-500 disabled:opacity-50 transition-colors"
+            >
+              <Plus className="w-4 h-4" />
+            </button>
+          </div>
+          <button
+            onClick={() => removeItem(item.id)}
+            className="text-brand-black-300 hover:text-red-500 transition-colors p-2"
+            aria-label="Remove item"
+          >
+            <X className="w-5 h-5" />
+          </button>
         </div>
       </div>
     </div>
