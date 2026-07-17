@@ -1,7 +1,7 @@
 import placeholders from './hijab-blur-placeholders.json';
 
 export type HijabColor = {
-  slug: 'champagne' | 'noir-ivoire' | 'sable-dore' | 'bleu-profond';
+  slug: 'champagne' | 'noir-ivoire' | 'sable-dore' | 'blanc';
   name: string;
   hex: string;
   imageUrl: string;
@@ -18,7 +18,7 @@ export const HIJAB_COLORS: HijabColor[] = [
     slug: 'champagne',
     name: 'Champagne',
     hex: '#E8D9BA',
-    imageUrl: '/gifts/hijab-champagne.jpg',
+    imageUrl: '/gifts/hijab-sable.jpg',
     imageWidth: 1200,
     imageHeight: 1500,
     blurDataURL: (placeholders as any).champagne,
@@ -42,7 +42,7 @@ export const HIJAB_COLORS: HijabColor[] = [
     slug: 'sable-dore',
     name: 'Sable Doré',
     hex: '#C4A67A',
-    imageUrl: '/gifts/hijab-sable.jpg',
+    imageUrl: '/gifts/hijab-champagne.jpg',
     imageWidth: 1200,
     imageHeight: 1500,
     blurDataURL: (placeholders as any).sable,
@@ -51,16 +51,16 @@ export const HIJAB_COLORS: HijabColor[] = [
     matchingBurkiniColors: ['beige', 'blanc', 'sable', 'terracotta'],
   },
   {
-    slug: 'bleu-profond',
-    name: 'Bleu Profond',
-    hex: '#1F3A5F',
+    slug: 'blanc',
+    name: 'Blanc',
+    hex: '#F9F9F9',
     imageUrl: '/gifts/hijab-bleu.jpg',
     imageWidth: 1200,
     imageHeight: 1500,
     blurDataURL: (placeholders as any).bleu,
-    altText: 'Hijab d\'été Bleu Profond — voile aux reflets marins',
-    note: 'Marin · pour burkini foncé',
-    matchingBurkiniColors: ['bleu', 'marine', 'vert', 'noir'],
+    altText: 'Hijab d\'été Blanc — voile pur et lumineux',
+    note: 'Lumineux · pour tout burkini',
+    matchingBurkiniColors: ['noir', 'marine', 'vert', 'bleu'],
   },
 ];
 
