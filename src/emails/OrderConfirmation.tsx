@@ -12,10 +12,17 @@ type Item = {
   imageUrl?: string;
 };
 
+type GiftItem = {
+  sku: string;
+  color: string;
+  linked_to_burkini_sku: string;
+};
+
 export function OrderConfirmationEmail({
   orderNumber,
   customerName,
   items,
+  giftItems = [],
   subtotal,
   shippingCost,
   discountAmount = 0,
@@ -27,6 +34,7 @@ export function OrderConfirmationEmail({
   orderNumber: string | number;
   customerName: string;
   items: Item[];
+  giftItems?: GiftItem[];
   subtotal: number;
   shippingCost: number;
   discountAmount?: number;
@@ -104,6 +112,25 @@ export function OrderConfirmationEmail({
                 </Row>
               </div>
             ))}
+
+            {giftItems && giftItems.length > 0 && (
+              <div style={{ marginTop: 24, padding: '16px', backgroundColor: '#F9F7F2', borderRadius: 6, border: '1px dashed #B8956A' }}>
+                <Text style={{ ...s.sectionLabel, color: '#B8956A', margin: '0 0 12px' }}>🎁 EN CADEAU</Text>
+                {giftItems.map((gift, idx) => (
+                  <Row key={idx} style={{ marginBottom: idx === giftItems.length - 1 ? 0 : 12 }}>
+                    <Column>
+                      <Text style={s.itemName}>Hijab d'Été (Édition Limitée)</Text>
+                      <Text style={s.itemVariant}>Couleur : {gift.color}</Text>
+                      <Text style={s.itemQty}>Lié à : {gift.linked_to_burkini_sku}</Text>
+                    </Column>
+                    <Column align="right" style={{ verticalAlign: 'top' }}>
+                      <Text style={s.itemPrice}>Offert</Text>
+                      <Text style={{ fontSize: 12, color: '#888', textDecoration: 'line-through' }}>{eur(25)}</Text>
+                    </Column>
+                  </Row>
+                ))}
+              </div>
+            )}
 
             {/* Totals */}
             <div style={{ marginTop: 16 }}>

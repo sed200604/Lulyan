@@ -13,6 +13,9 @@ import { trackViewContent, trackAddToCart } from '@/lib/pixel';
 const ShareDrawer = dynamic(() => import('@/components/product/ShareDrawer'), { ssr: false });
 const SizeGuideModal = dynamic(() => import('@/components/product/SizeGuideModal'), { ssr: false });
 import { TrustBadge } from '@/components/checkout/TrustBadge';
+import { GiftOfferSection } from '@/components/product/GiftOfferSection';
+import { getProductBySlug } from '@/data/products';
+import { isGiftOfferActive, HIJAB_GIFT_OFFER } from '@/config/promotions';
 
 interface ProductInfoProps {
   product: Product;
@@ -36,7 +39,14 @@ export function ProductInfo({ product }: ProductInfoProps) {
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [showSizeGuide, setShowSizeGuide] = useState(false);
   const [showShare, setShowShare] = useState(false);
+  const [selectedGiftColor, setSelectedGiftColor] = useState<string | null>('champagne');
+  const [giftError, setGiftError] = useState(false);
+  
   const addItem = useCartStore((state) => state.addItem);
+  const addGiftItem = useCartStore((state) => state.addGiftItem);
+
+  const giftProduct = product.isGiftEligible ? getProductBySlug(HIJAB_GIFT_OFFER.giftProductSlug) : null;
+  const isOfferActive = isGiftOfferActive();
 
   useEffect(() => {
     trackViewContent({
@@ -64,7 +74,18 @@ export function ProductInfo({ product }: ProductInfoProps) {
       }
       return;
     }
+    if (isOfferActive && product.isGiftEligible && !selectedGiftColor) {
+      setGiftError(true);
+      const giftSelector = document.getElementById('gift-selector');
+      if (giftSelector) {
+        const y = giftSelector.getBoundingClientRect().top + window.scrollY - 100;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+      return;
+    }
+
     setSizeError(false);
+    setGiftError(false);
     setIsAdding(true);
     
     addItem(product, selectedSize, selectedColor.name, 1);
@@ -75,6 +96,10 @@ export function ProductInfo({ product }: ProductInfoProps) {
       price: product.price,
       quantity: 1,
     });
+
+    if (isOfferActive && product.isGiftEligible && giftProduct && selectedGiftColor) {
+      addGiftItem(giftProduct, selectedGiftColor, product.id, HIJAB_GIFT_OFFER.originalValue);
+    }
     
     setTimeout(() => {
       setIsAdding(false);
@@ -214,6 +239,29 @@ export function ProductInfo({ product }: ProductInfoProps) {
           </motion.p>
         )}
       </div>
+
+      {/* ─── GIFT OFFER SECTION ─── */}
+      {isOfferActive && product.isGiftEligible && giftProduct && (
+        <div id="gift-selector">
+          <GiftOfferSection 
+            onColorSelect={(color) => {
+              setSelectedGiftColor(color);
+              setGiftError(false);
+            }} 
+            selectedColor={selectedGiftColor} 
+            giftProduct={giftProduct} 
+          />
+          {giftError && (
+            <motion.p
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-2 text-xs text-red-500 font-montserrat"
+            >
+              Veuillez choisir la couleur de votre cadeau
+            </motion.p>
+          )}
+        </div>
+      )}
 
       {/* ─── ADD TO CART & ACTIONS ─── */}
       <div className="mt-8 space-y-3">

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { products } from '@/data/products';
+import { getFeaturedProducts } from '@/data/products';
 import { MobileProductCard } from '@/components/product/MobileProductCard';
 
 export function MobileFeaturedCarousel() {
@@ -81,7 +81,7 @@ export function MobileFeaturedCarousel() {
           WebkitMaskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent)'
         }}
       >
-        {products.slice(0, 4).map((product) => (
+        {getFeaturedProducts().slice(0, 4).map((product) => (
           <motion.div
             key={product.id}
             variants={itemVariants}

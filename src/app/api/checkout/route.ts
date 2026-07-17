@@ -16,8 +16,18 @@ export async function POST(req: Request) {
       );
     }
 
-    const subtotalAmount = items.reduce((sum: number, item: any) => sum + (item.price * item.quantity), 0);
+    const chargeableItems = items.filter((item: any) => !item.isGift);
+    const subtotalAmount = chargeableItems.reduce((sum: number, item: any) => sum + (item.price * item.quantity), 0);
     
+    // Sanity check: Ensure the subtotal matches what's expected (excluding gifts)
+    const allItemsExpectedSubtotal = items.reduce((sum: number, item: any) => {
+      if (item.isGift) return sum;
+      return sum + (item.price * item.quantity);
+    }, 0);
+    if (subtotalAmount !== allItemsExpectedSubtotal) {
+      console.warn('[Stripe Checkout] Sanity check failed: subtotal mismatch with chargeable items.');
+    }
+
     let discountAmount = 0;
     const code = promoCode?.toUpperCase()?.trim();
     if (code === 'BIENVENUE') discountAmount = subtotalAmount * 0.10;
@@ -25,6 +35,8 @@ export async function POST(req: Request) {
     
     const totalAmount = subtotalAmount - discountAmount;
     const amountInCents = Math.round((totalAmount + shippingAmount) * 100);
+
+    const giftItems = items.filter((item: any) => item.isGift);
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amountInCents,
@@ -40,6 +52,11 @@ export async function POST(req: Request) {
         country: customerDetails?.country || '',
         // Strip large data from items to fit metadata limit (500 chars)
         itemsSummary: JSON.stringify(items.map((i: any) => ({ n: i.name || i.id, q: i.quantity, p: i.price, i: i.image || i.imageUrl }))).substring(0, 500),
+        gift_items: JSON.stringify(giftItems.map((i: any) => ({ 
+          sku: i.slug || i.id, 
+          color: i.color, 
+          linked_to_burkini_sku: i.linkedToItemId 
+        }))).substring(0, 500),
         subtotal: subtotalAmount.toString(),
         shipping: shippingAmount.toString(),
         discount: discountAmount.toString()

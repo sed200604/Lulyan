@@ -10,11 +10,49 @@ export interface Product extends Omit<BaseProduct, 'images'> {
     src: string;
     alt: string;
   }[];
+
   features: string[];
   fabricDetails: string;
 }
 
 export const products: Product[] = [
+  {
+    id: 'GIFT-001',
+    slug: 'hijab-ete-2026',
+    name: 'Hijab d\'Été Édition Limitée',
+    subtitle: 'Offert avec votre burkini',
+    collection: 'luliyane-riviera',
+    category: 'riviera',
+    style: 'prestige',
+    price: 25.00,
+    currency: 'EUR',
+    colors: [
+      { name: 'Champagne', value: '#E5D3B3', slug: 'champagne' },
+      { name: 'Sable', value: '#C2B280', slug: 'sable' },
+      { name: 'Noir', value: '#0A0A0A', slug: 'noir' },
+      { name: 'Blanc', value: '#FFFFFF', slug: 'blanc' },
+    ],
+    sizes: [
+      { label: 'Taille Unique', value: 'Unique', inStock: true },
+    ],
+    images: [],
+    description: 'Hijab d\'été ultra léger.',
+    shortDescription: 'Hijab assorti.',
+    features: ['Séchage rapide'],
+    fabricDetails: 'Polyamide/élasthanne',
+    fabric: 'Polyamide/élasthanne',
+    careInstructions: ['Lavage à la main recommandé', 'Séchage à l\'ombre'],
+    inStock: true,
+    stockQuantity: 50,
+    isNew: true,
+    isFeatured: true,
+    rating: 4.9,
+    reviewCount: 124,
+    createdAt: '2024-03-01T00:00:00Z',
+    tags: [],
+    isGiftOnly: true,
+    
+  },
   {
     id: 'LR-001',
     slug: 'burkini-riviera-noir',
@@ -69,6 +107,43 @@ export const products: Product[] = [
     isNew: true,
     isBestseller: true,
     isFeatured: true,
+    isGiftEligible: true,
+  },
+  {
+    id: 'GIFT-001',
+    slug: 'hijab-ete-2026',
+    name: 'Hijab d\'Été 2026',
+    subtitle: 'Notre édition d\'été en voile de coton léger. Offert avec chaque burkini de la collection.',
+    collection: 'luliyane-riviera',
+    category: 'riviera',
+    style: 'integral',
+    price: 25.00,
+    currency: 'EUR',
+    colors: [
+      { name: 'Champagne', value: '#E8D9BA', slug: 'champagne', image: '/gifts/hijab-champagne.jpg' },
+      { name: 'Noir Ivoire', value: '#1E1E1E', slug: 'noir-ivoire', image: '/gifts/hijab-noir.jpg' },
+      { name: 'Sable Doré', value: '#C4A67A', slug: 'sable-dore', image: '/gifts/hijab-sable.jpg' },
+      { name: 'Bleu Profond', value: '#1F3A5F', slug: 'bleu-profond', image: '/gifts/hijab-bleu.jpg' }
+    ],
+    sizes: [
+      { label: 'Standard', value: 'standard', inStock: true }
+    ],
+    images: [],
+    description: 'Notre édition d\'été en voile de coton léger. Offert avec chaque burkini de la collection.',
+    shortDescription: 'Offert avec chaque burkini de la collection.',
+    features: ['Voile de coton léger', '180 × 90 cm'],
+    fabricDetails: 'Coton léger',
+    fabric: 'Coton',
+    careInstructions: [],
+    inStock: true,
+    stockQuantity: 100,
+    rating: 5,
+    reviewCount: 0,
+    createdAt: new Date().toISOString(),
+    tags: [],
+    isNew: true,
+    isFeatured: false,
+    isGiftOnly: true,
   },
   {
     id: 'LR-002',
@@ -128,6 +203,7 @@ export const products: Product[] = [
     isNew: false,
     isBestseller: false,
     isFeatured: true,
+    isGiftEligible: true,
   },
   {
     id: 'LR-003',
@@ -186,6 +262,7 @@ export const products: Product[] = [
     isNew: false,
     isBestseller: false,
     isFeatured: false,
+    isGiftEligible: true,
   },
   {
     id: 'LR-004',
@@ -243,6 +320,7 @@ export const products: Product[] = [
     isNew: true,
     isBestseller: true,
     isFeatured: true,
+    isGiftEligible: true,
   },
   {
     id: 'LR-005',
@@ -292,6 +370,7 @@ export const products: Product[] = [
     isNew: false,
     isBestseller: false,
     isFeatured: true,
+    isGiftEligible: true,
   },
   {
     id: 'LR-006',
@@ -404,6 +483,7 @@ export const products: Product[] = [
     isNew: true,
     isBestseller: false,
     isFeatured: true,
+    isGiftEligible: true,
   },
   {
     id: 'LR-010',
@@ -455,6 +535,7 @@ export const products: Product[] = [
     isNew: true,
     isBestseller: false,
     isFeatured: true,
+    isGiftEligible: true,
   },
   {
     id: 'LR-011',
@@ -506,6 +587,7 @@ export const products: Product[] = [
     isNew: true,
     isBestseller: false,
     isFeatured: true,
+    isGiftEligible: true,
   },
   {
     id: 'LR-012',
@@ -563,6 +645,7 @@ export const products: Product[] = [
     isNew: true,
     isBestseller: false,
     isFeatured: true,
+    isGiftEligible: true,
   },
   {
     id: 'LR-013',
@@ -619,6 +702,7 @@ export const products: Product[] = [
     isNew: true,
     isBestseller: false,
     isFeatured: true,
+    isGiftEligible: true,
   },
   {
     id: 'LR-014',
@@ -675,12 +759,13 @@ export const products: Product[] = [
     isNew: true,
     isBestseller: false,
     isFeatured: true,
+    isGiftEligible: true,
   }
 ];
 
-export const getAllProducts = () => products;
-export const getProductsByStyle = (style: ProductStyle) => products.filter((p) => p.style === style);
-export const getFeaturedProducts = () => products.filter((p) => p.isFeatured);
+export const getAllProducts = () => products.filter(p => !p.isGiftOnly);
+export const getProductsByStyle = (style: ProductStyle) => products.filter((p) => p.style === style && !p.isGiftOnly);
+export const getFeaturedProducts = () => products.filter((p) => p.isFeatured && !p.isGiftOnly);
 export const getProductBySlug = (slug: string) => products.find((p) => p.slug === slug);
 
 export interface Review {

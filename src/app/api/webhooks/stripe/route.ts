@@ -57,9 +57,13 @@ export async function POST(req: Request) {
   deliveryTo.setDate(deliveryTo.getDate() + 5);
 
   let items = [];
+  let giftItems = [];
   try {
     if (metadata.itemsSummary) {
       items = JSON.parse(metadata.itemsSummary);
+    }
+    if (metadata.gift_items) {
+      giftItems = JSON.parse(metadata.gift_items);
     }
   } catch (e) {
     console.error('Failed to parse items from metadata');
@@ -82,6 +86,7 @@ export async function POST(req: Request) {
         lineTotal: Number(it.p) * Number(it.q),
         imageUrl: it.i || '',
       })),
+      giftItems: giftItems,
       subtotal: Number(metadata.subtotal || 0),
       shippingCost: Number(metadata.shipping || 0),
       discountAmount: Number(metadata.discount || 0),

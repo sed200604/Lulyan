@@ -35,6 +35,10 @@ export interface Product {
   ratingDistribution?: { 5: number; 4: number; 3: number; 2: number; 1: number };
   complementaryProductIds?: string[];
   similarProductIds?: string[];
+  
+  // Gift offer logic
+  isGiftEligible?: boolean;
+  isGiftOnly?: boolean;
 }
 
 export interface ProductImage {
@@ -102,4 +106,9 @@ export interface CartItem {
   size: string;
   color: string;
   quantity: number;
+  
+  // Gift logic
+  isGift?: boolean;
+  linkedToItemId?: string;
+  originalValue?: number;
 }

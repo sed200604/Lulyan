@@ -4,6 +4,8 @@ import { MobileMenu } from '@/components/layout/MobileMenu';
 import { SearchOverlay } from '@/components/layout/SearchOverlay';
 import { Footer } from '@/components/layout/Footer';
 
+import GiftOfferBanner from '@/components/marketing/GiftOfferBanner';
+
 export default function ShopLayout({
   children,
 }: {
@@ -12,6 +14,7 @@ export default function ShopLayout({
   return (
     <>
       <Header />
+      <GiftOfferBanner />
       <main id="main-content" className="flex-1 flex flex-col">
         {children}
       </main>

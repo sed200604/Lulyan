@@ -46,28 +46,47 @@ export function CartItem({ item, variant = 'drawer' }: CartItemProps) {
           </div>
           
           <div className="flex justify-between items-end mt-4">
-            <div className="flex items-center border border-brand-black-200">
-              <button
-                onClick={handleDecrease}
-                disabled={item.quantity <= 1}
-                className="w-8 h-8 flex items-center justify-center text-brand-black-400 hover:text-brand-black-500 disabled:opacity-50 transition-colors"
-              >
-                <Minus className="w-3 h-3" />
-              </button>
-              <span className="w-8 text-center font-montserrat text-sm text-brand-black-500">
-                {item.quantity}
-              </span>
-              <button
-                onClick={handleIncrease}
-                disabled={item.quantity >= 10}
-                className="w-8 h-8 flex items-center justify-center text-brand-black-400 hover:text-brand-black-500 disabled:opacity-50 transition-colors"
-              >
-                <Plus className="w-3 h-3" />
-              </button>
-            </div>
-            <span className="font-montserrat text-brand-black-500">
-              {(item.price * item.quantity).toFixed(2)} €
-            </span>
+            {item.isGift ? (
+              <div className="flex flex-col gap-1 w-full mt-2">
+                <div className="w-full h-px bg-brand-black-100/50 mb-2"></div>
+                <div className="flex justify-between items-center w-full">
+                  <span className="text-xs font-medium text-brand-gold-500 italic">🎁 Offert avec votre burkini</span>
+                  <div className="flex items-center gap-2">
+                    <span className="font-montserrat text-sm text-brand-black-300 line-through">
+                      {(item.originalValue || 25).toFixed(2)} €
+                    </span>
+                    <span className="bg-[#E8F5E9] text-[#2E7D32] px-2 py-0.5 rounded text-[10px] font-bold tracking-wide">
+                      OFFERT
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="flex items-center border border-brand-black-200">
+                  <button
+                    onClick={handleDecrease}
+                    disabled={item.quantity <= 1}
+                    className="w-8 h-8 flex items-center justify-center text-brand-black-400 hover:text-brand-black-500 disabled:opacity-50 transition-colors"
+                  >
+                    <Minus className="w-3 h-3" />
+                  </button>
+                  <span className="w-8 text-center font-montserrat text-sm text-brand-black-500">
+                    {item.quantity}
+                  </span>
+                  <button
+                    onClick={handleIncrease}
+                    disabled={item.quantity >= 10}
+                    className="w-8 h-8 flex items-center justify-center text-brand-black-400 hover:text-brand-black-500 disabled:opacity-50 transition-colors"
+                  >
+                    <Plus className="w-3 h-3" />
+                  </button>
+                </div>
+                <span className="font-montserrat text-brand-black-500">
+                  {(item.price * item.quantity).toFixed(2)} €
+                </span>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -109,40 +128,53 @@ export function CartItem({ item, variant = 'drawer' }: CartItemProps) {
         </div>
         
         <div className="flex justify-between items-center mt-6">
-          <div className="flex items-center border border-brand-black-200">
+          {item.isGift ? (
+            <div className="flex flex-col gap-1 w-full">
+              <div className="flex justify-between items-center w-full">
+                <span className="text-sm font-medium text-brand-gold-500 italic">🎁 Offert avec votre burkini</span>
+                <span className="bg-[#E8F5E9] text-[#2E7D32] px-3 py-1 rounded text-xs font-bold tracking-wide">
+                  OFFERT
+                </span>
+              </div>
+            </div>
+          ) : (
+            <div className="flex items-center border border-brand-black-200">
+              <button
+                onClick={handleDecrease}
+                disabled={item.quantity <= 1}
+                className="w-10 h-10 flex items-center justify-center text-brand-black-400 hover:text-brand-black-500 disabled:opacity-50 transition-colors"
+              >
+                <Minus className="w-4 h-4" />
+              </button>
+              <input 
+                type="number"
+                value={item.quantity}
+                onChange={(e) => {
+                  const val = parseInt(e.target.value);
+                  if (!isNaN(val)) updateQuantity(item.id, val);
+                }}
+                min="1"
+                max="10"
+                className="w-12 h-10 text-center font-montserrat text-brand-black-500 border-none focus:ring-0 appearance-none bg-transparent"
+              />
+              <button
+                onClick={handleIncrease}
+                disabled={item.quantity >= 10}
+                className="w-10 h-10 flex items-center justify-center text-brand-black-400 hover:text-brand-black-500 disabled:opacity-50 transition-colors"
+              >
+                <Plus className="w-4 h-4" />
+              </button>
+            </div>
+          )}
+          {!item.isGift && (
             <button
-              onClick={handleDecrease}
-              disabled={item.quantity <= 1}
-              className="w-10 h-10 flex items-center justify-center text-brand-black-400 hover:text-brand-black-500 disabled:opacity-50 transition-colors"
+              onClick={() => removeItem(item.id)}
+              className="text-brand-black-300 hover:text-red-500 transition-colors p-2"
+              aria-label="Remove item"
             >
-              <Minus className="w-4 h-4" />
+              <X className="w-5 h-5" />
             </button>
-            <input 
-              type="number"
-              value={item.quantity}
-              onChange={(e) => {
-                const val = parseInt(e.target.value);
-                if (!isNaN(val)) updateQuantity(item.id, val);
-              }}
-              min="1"
-              max="10"
-              className="w-12 h-10 text-center font-montserrat text-brand-black-500 border-none focus:ring-0 appearance-none bg-transparent"
-            />
-            <button
-              onClick={handleIncrease}
-              disabled={item.quantity >= 10}
-              className="w-10 h-10 flex items-center justify-center text-brand-black-400 hover:text-brand-black-500 disabled:opacity-50 transition-colors"
-            >
-              <Plus className="w-4 h-4" />
-            </button>
-          </div>
-          <button
-            onClick={() => removeItem(item.id)}
-            className="text-brand-black-300 hover:text-red-500 transition-colors p-2"
-            aria-label="Remove item"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          )}
         </div>
       </div>
     </div>

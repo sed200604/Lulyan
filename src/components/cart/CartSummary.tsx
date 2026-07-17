@@ -19,6 +19,8 @@ export function CartSummary({ variant = 'page' }: CartSummaryProps) {
   const total = subtotalValue - discountValue + shippingCost;
   const isCartEmpty = items.length === 0;
   
+  const giftSavings = items.filter(item => item.isGift).reduce((sum, item) => sum + ((item.originalValue || 25) * item.quantity), 0);
+  
   const [promoInput, setPromoInput] = React.useState('');
   const [promoMessage, setPromoMessage] = React.useState<{ text: string, type: 'success' | 'error' } | null>(null);
 
@@ -69,6 +71,11 @@ export function CartSummary({ variant = 'page' }: CartSummaryProps) {
           <span>TOTAL</span>
           <span>{(subtotalValue - discountValue).toFixed(2)} €</span>
         </div>
+        {giftSavings > 0 && (
+          <div className="text-right text-xs font-montserrat text-[#2E7D32] font-medium">
+            Vous économisez {giftSavings.toFixed(2)} €
+          </div>
+        )}
         <button 
           onClick={() => handleCheckout()}
           disabled={isCartEmpty}
@@ -110,10 +117,18 @@ export function CartSummary({ variant = 'page' }: CartSummaryProps) {
         </div>
       </div>
 
-      <div className="flex justify-between items-center font-montserrat font-bold text-xl text-brand-black-500 mb-8">
+      <div className="flex justify-between items-center font-montserrat font-bold text-xl text-brand-black-500 mb-1">
         <span>TOTAL</span>
         <span>{total.toFixed(2)} €</span>
       </div>
+      
+      {giftSavings > 0 && (
+        <div className="text-right text-sm font-montserrat text-[#2E7D32] font-medium mb-8">
+          Vous économisez {giftSavings.toFixed(2)} €
+        </div>
+      )}
+      
+      {giftSavings === 0 && <div className="mb-8"></div>}
 
       {variant === 'page' && (
         <>

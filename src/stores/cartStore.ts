@@ -9,6 +9,8 @@ interface CartState {
   
   // Actions
   addItem: (product: Product, size: string, color: string, quantity?: number) => void;
+  addGiftItem: (product: Product, color: string, linkedToItemId: string, originalValue: number) => void;
+  updateGiftColor: (giftItemId: string, color: string) => void;
   removeItem: (itemId: string) => void;
   updateQuantity: (itemId: string, quantity: number) => void;
   clearCart: () => void;
@@ -65,17 +67,63 @@ export const useCartStore = create<CartState>()(
         });
       },
 
+      addGiftItem: (product, color, linkedToItemId, originalValue) => {
+        set((state) => {
+          const giftId = `GIFT-${linkedToItemId}`;
+          const existingItemIndex = state.items.findIndex(item => item.id === giftId);
+
+          const linkedItem = state.items.find(item => item.id === linkedToItemId);
+          const quantity = linkedItem ? linkedItem.quantity : 1;
+
+          if (existingItemIndex > -1) {
+            const newItems = [...state.items];
+            newItems[existingItemIndex].color = color;
+            newItems[existingItemIndex].quantity = quantity;
+            return { items: newItems };
+          }
+
+          return {
+            items: [...state.items, {
+              id: giftId,
+              productId: product.id,
+              name: product.name,
+              slug: product.slug,
+              price: 0, // gift is free
+              image: product.colors.find(c => c.slug === color)?.image || '',
+              size: 'Standard',
+              color,
+              quantity,
+              isGift: true,
+              linkedToItemId,
+              originalValue
+            }]
+          };
+        });
+      },
+
+      updateGiftColor: (giftItemId, color) => {
+        set((state) => ({
+          items: state.items.map(item => 
+            item.id === giftItemId
+              ? { ...item, color, image: state.items.find(i => i.id === giftItemId)?.image || '' } // Could improve image selection, but acceptable
+              : item
+          )
+        }));
+      },
+
       removeItem: (itemId) => {
         set((state) => ({
-          items: state.items.filter(item => item.id !== itemId)
+          // Remove the item and any gift linked to it
+          items: state.items.filter(item => item.id !== itemId && item.linkedToItemId !== itemId)
         }));
       },
 
       updateQuantity: (itemId, quantity) => {
+        const newQuantity = Math.max(1, Math.min(quantity, 10));
         set((state) => ({
           items: state.items.map(item => 
-            item.id === itemId 
-              ? { ...item, quantity: Math.max(1, Math.min(quantity, 10)) }
+            item.id === itemId || item.linkedToItemId === itemId
+              ? { ...item, quantity: newQuantity }
               : item
           )
         }));
@@ -105,7 +153,10 @@ export const useCartStore = create<CartState>()(
       },
 
       subtotal: () => {
-        return get().items.reduce((total, item) => total + (item.price * item.quantity), 0);
+        return get().items.reduce((total, item) => {
+          if (item.isGift) return total;
+          return total + (item.price * item.quantity);
+        }, 0);
       },
       
       promoDiscount: () => {
