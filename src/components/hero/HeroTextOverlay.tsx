@@ -6,7 +6,7 @@
 //   • Waterfall entry animation (Part 4.1)
 //   • Two-line wordmark logotype (Part 3.1)
 //   • Tagline with gold containment ring (Part 3.2)
-//   • CTA with gold-fill horizontal sweep (Part 3.3, 4.3, 4.4)
+//   • CTA with brand-gold-fill horizontal sweep (Part 3.3, 4.3, 4.4)
 //   • prefers-reduced-motion graceful fallback
 // ═══════════════════════════════════════════
 

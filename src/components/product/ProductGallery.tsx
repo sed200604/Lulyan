@@ -54,7 +54,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
               key={i}
               onClick={() => setCurrentIndex(i)}
               className={`relative w-[80px] h-[107px] transition-all duration-300 border-2 ${
-                i === currentIndex ? 'border-gold-500' : 'border-transparent hover:border-gold-500/50'
+                i === currentIndex ? 'border-brand-gold-500' : 'border-transparent hover:border-brand-gold-500/50'
               }`}
               aria-label={`Vue ${i + 1}`}
             >
@@ -147,7 +147,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
               onClick={() => scrollToIndex(i)}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
                 i === currentIndex 
-                  ? 'bg-gold-500 w-6' 
+                  ? 'bg-brand-gold-500 w-6' 
                   : 'bg-neutral-300'
               }`}
               aria-label={`Image ${i + 1}`}

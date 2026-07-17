@@ -109,7 +109,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
   return (
     <div className="flex flex-col h-full">
       {/* ─── EN-TÊTE PRODUIT ─── */}
-      <span className="text-[10px] font-montserrat tracking-[0.4em] uppercase text-gold-500">
+      <span className="text-[10px] font-montserrat tracking-[0.4em] uppercase text-brand-gold-500">
         {SITE_CONFIG.collectionName}
       </span>
       
@@ -131,10 +131,10 @@ export function ProductInfo({ product }: ProductInfoProps) {
           <div className="flex items-center gap-2 text-sm text-brand-black-600">
             <div className="flex">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className={`w-3.5 h-3.5 ${i < Math.round(product.rating) ? 'text-gold-500' : 'text-neutral-200'}`} fill="currentColor" />
+                <Star key={i} className={`w-3.5 h-3.5 ${i < Math.round(product.rating) ? 'text-brand-gold-500' : 'text-neutral-200'}`} fill="currentColor" />
               ))}
             </div>
-            <span className="text-xs font-montserrat text-neutral-500 group-hover:text-gold-500 transition-colors">
+            <span className="text-xs font-montserrat text-neutral-500 group-hover:text-brand-gold-500 transition-colors">
               {product.rating.toFixed(1)} ({product.reviewCount} avis)
             </span>
           </div>
@@ -171,8 +171,8 @@ export function ProductInfo({ product }: ProductInfoProps) {
               onClick={() => setSelectedColor(color)}
               className={`relative w-10 h-10 rounded-full transition-all duration-300 ${
                 selectedColor.slug === color.slug
-                  ? 'ring-2 ring-gold-500 ring-offset-2'
-                  : 'ring-1 ring-neutral-200 hover:ring-gold-500/50'
+                  ? 'ring-2 ring-brand-gold-500 ring-offset-2'
+                  : 'ring-1 ring-neutral-200 hover:ring-brand-gold-500/50'
               }`}
               style={{ backgroundColor: color.value }}
               aria-label={color.name}
@@ -201,7 +201,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
           </span>
           <button 
             onClick={() => setShowSizeGuide(true)}
-            className="text-xs font-montserrat text-gold-500 underline underline-offset-4 hover:text-gold-600 transition-colors"
+            className="text-xs font-montserrat text-brand-gold-500 underline underline-offset-4 hover:text-brand-gold-600 transition-colors"
           >
             Guide des tailles
           </button>
@@ -218,10 +218,10 @@ export function ProductInfo({ product }: ProductInfoProps) {
               disabled={!size.inStock}
               className={`py-3 text-xs font-montserrat tracking-wider border transition-all duration-300 ${
                 selectedSize === size.value
-                  ? 'border-gold-500 bg-gold-500 text-white'
+                  ? 'border-brand-gold-500 bg-brand-gold-500 text-white'
                   : !size.inStock
                   ? 'border-neutral-100 text-neutral-300 bg-neutral-50 cursor-not-allowed opacity-50'
-                  : 'border-neutral-200 text-neutral-700 hover:border-gold-500'
+                  : 'border-neutral-200 text-neutral-700 hover:border-brand-gold-500'
               }`}
             >
               {size.label}
@@ -269,7 +269,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
           id="add-to-cart-button"
           onClick={handleAddToCart}
           disabled={isAdding}
-          className="w-full py-4 bg-neutral-900 text-white text-xs font-montserrat tracking-[0.3em] uppercase relative overflow-hidden group hover:bg-gold-500 transition-colors duration-500 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full py-4 bg-neutral-900 text-white text-xs font-montserrat tracking-[0.3em] uppercase relative overflow-hidden group hover:bg-brand-gold-500 transition-colors duration-500 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <AnimatePresence mode="wait">
             {isAdding ? (
@@ -303,15 +303,15 @@ export function ProductInfo({ product }: ProductInfoProps) {
             onClick={() => {
               setIsWishlisted(!isWishlisted);
             }}
-            className="flex-1 flex items-center justify-center gap-2 py-3 border border-neutral-200 text-xs font-montserrat tracking-wider text-neutral-600 hover:border-gold-500 hover:text-gold-500 transition-all duration-300"
+            className="flex-1 flex items-center justify-center gap-2 py-3 border border-neutral-200 text-xs font-montserrat tracking-wider text-neutral-600 hover:border-brand-gold-500 hover:text-brand-gold-500 transition-all duration-300"
           >
-            <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-gold-500 text-gold-500' : ''}`} />
+            <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-brand-gold-500 text-brand-gold-500' : ''}`} />
             {isWishlisted ? 'Dans ma wishlist' : 'Ajouter à la wishlist'}
           </button>
           
           <button
             onClick={() => setShowShare(true)}
-            className="flex items-center justify-center gap-2 px-4 py-3 border border-neutral-200 text-xs font-montserrat tracking-wider text-neutral-600 hover:border-gold-500 hover:text-gold-500 transition-all duration-300"
+            className="flex items-center justify-center gap-2 px-4 py-3 border border-neutral-200 text-xs font-montserrat tracking-wider text-neutral-600 hover:border-brand-gold-500 hover:text-brand-gold-500 transition-all duration-300"
           >
             <Share2 className="w-4 h-4" />
             Partager
@@ -328,7 +328,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
           { icon: Droplets, text: 'Séchage ultra-rapide', sub: 'Résistant chlore & sel' },
         ].map(({ icon: Icon, text, sub }) => (
           <div key={text} className="flex items-start gap-3">
-            <Icon className="w-4 h-4 text-gold-500 mt-0.5 flex-shrink-0" />
+            <Icon className="w-4 h-4 text-brand-gold-500 mt-0.5 flex-shrink-0" />
             <div>
               <span className="text-xs font-montserrat text-neutral-800">{text}</span>
               <span className="text-xs font-montserrat text-neutral-400 ml-1">— {sub}</span>

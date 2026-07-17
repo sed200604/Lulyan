@@ -75,7 +75,7 @@ export function StickyAddToCart({ product }: StickyAddToCartProps) {
             <button
               onClick={handleAddToCart}
               disabled={isAdding}
-              className="px-6 py-3 bg-neutral-900 text-white text-xs font-montserrat tracking-[0.2em] uppercase whitespace-nowrap active:bg-gold-500 transition-colors w-[140px] flex justify-center disabled:opacity-50"
+              className="px-6 py-3 bg-neutral-900 text-white text-xs font-montserrat tracking-[0.2em] uppercase whitespace-nowrap active:bg-brand-gold-500 transition-colors w-[140px] flex justify-center disabled:opacity-50"
             >
               {isAdding ? <Check className="w-4 h-4" /> : 'Ajouter'}
             </button>

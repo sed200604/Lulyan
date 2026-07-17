@@ -85,7 +85,7 @@ export default function ShareDrawer({ url, onClose }: ShareDrawerProps) {
               />
               <button 
                 onClick={handleCopy}
-                className="p-2 bg-neutral-100 hover:bg-gold-50 transition-colors rounded"
+                className="p-2 bg-neutral-100 hover:bg-brand-gold-50 transition-colors rounded"
                 title="Copier le lien"
               >
                 {copied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4 text-neutral-700" />}
@@ -98,9 +98,9 @@ export default function ShareDrawer({ url, onClose }: ShareDrawerProps) {
                 <button
                   key={option.name}
                   onClick={option.action}
-                  className="flex flex-col items-center justify-center gap-3 p-4 border border-neutral-100 hover:border-gold-500 rounded transition-colors group"
+                  className="flex flex-col items-center justify-center gap-3 p-4 border border-neutral-100 hover:border-brand-gold-500 rounded transition-colors group"
                 >
-                  <option.icon className="w-6 h-6 text-neutral-600 group-hover:text-gold-500 transition-colors" />
+                  <option.icon className="w-6 h-6 text-neutral-600 group-hover:text-brand-gold-500 transition-colors" />
                   <span className="text-xs font-montserrat text-neutral-800">{option.name}</span>
                 </button>
               ))}

@@ -102,10 +102,10 @@ export default function ProductPage({ params }: Props) {
         {/* Breadcrumb */}
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-4">
           <nav className="flex items-center text-[10px] md:text-xs font-montserrat tracking-wider uppercase text-neutral-500">
-            <Link href={ROUTES.HOME} className="hover:text-gold-500 transition-colors">Accueil</Link>
-            <span className="mx-2 text-gold-500">/</span>
-            <Link href={ROUTES.COLLECTION} className="hover:text-gold-500 transition-colors">{SITE_CONFIG.collectionName}</Link>
-            <span className="mx-2 text-gold-500">/</span>
+            <Link href={ROUTES.HOME} className="hover:text-brand-gold-500 transition-colors">Accueil</Link>
+            <span className="mx-2 text-brand-gold-500">/</span>
+            <Link href={ROUTES.COLLECTION} className="hover:text-brand-gold-500 transition-colors">{SITE_CONFIG.collectionName}</Link>
+            <span className="mx-2 text-brand-gold-500">/</span>
             <span className="text-neutral-900 truncate">{product.name}</span>
           </nav>
         </div>

@@ -55,7 +55,7 @@ export default function Lightbox({ images, initialIndex, onClose }: LightboxProp
           </div>
           <button 
             onClick={onClose}
-            className="text-white hover:text-gold-500 transition-colors p-2"
+            className="text-white hover:text-brand-gold-500 transition-colors p-2"
           >
             <X className="w-8 h-8" />
           </button>
@@ -106,7 +106,7 @@ export default function Lightbox({ images, initialIndex, onClose }: LightboxProp
               key={idx}
               onClick={() => setCurrentIndex(idx)}
               className={`relative w-16 h-24 border-2 transition-all ${
-                idx === currentIndex ? 'border-gold-500 opacity-100' : 'border-transparent opacity-50 hover:opacity-100'
+                idx === currentIndex ? 'border-brand-gold-500 opacity-100' : 'border-transparent opacity-50 hover:opacity-100'
               }`}
             >
               <Image

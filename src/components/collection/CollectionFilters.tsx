@@ -57,7 +57,7 @@ export default function CollectionFilters({ onFilterChange }: CollectionFiltersP
         </p>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-2 text-xs font-montserrat tracking-[0.2em] uppercase hover:text-gold-500 transition-colors md:hidden"
+          className="flex items-center gap-2 text-xs font-montserrat tracking-[0.2em] uppercase hover:text-brand-gold-500 transition-colors md:hidden"
         >
           <SlidersHorizontal className="w-4 h-4" />
           Filtrer
@@ -110,7 +110,7 @@ export default function CollectionFilters({ onFilterChange }: CollectionFiltersP
                   key={option.value}
                   onClick={() => updateFilter('style', option.value)}
                   className={`block text-sm font-montserrat ${
-                    filters.style === option.value ? 'text-gold-500' : 'text-neutral-600'
+                    filters.style === option.value ? 'text-brand-gold-500' : 'text-neutral-600'
                   }`}
                 >
                   {option.label}
@@ -143,7 +143,7 @@ function FilterDropdown({
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 text-xs font-montserrat tracking-[0.15em] uppercase text-neutral-700 hover:text-gold-500 transition-colors"
+        className="flex items-center gap-2 text-xs font-montserrat tracking-[0.15em] uppercase text-neutral-700 hover:text-brand-gold-500 transition-colors"
       >
         {label}: {selected?.label}
         <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
@@ -162,7 +162,7 @@ function FilterDropdown({
                 onClick={() => { onChange(option.value); setIsOpen(false); }}
                 className={`block w-full text-left px-4 py-2.5 text-xs font-montserrat tracking-wider ${
                   value === option.value
-                    ? 'text-gold-500 bg-gold-500/5'
+                    ? 'text-brand-gold-500 bg-brand-gold-500/5'
                     : 'text-neutral-600 hover:bg-neutral-50'
                 }`}
               >

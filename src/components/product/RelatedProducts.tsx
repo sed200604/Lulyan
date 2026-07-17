@@ -19,7 +19,7 @@ export function RelatedProducts({ currentProductId }: RelatedProductsProps) {
     <section className="py-16 md:py-24 bg-[#FFFEF9]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-10">
-          <span className="text-[10px] font-montserrat tracking-[0.4em] uppercase text-gold-500">
+          <span className="text-[10px] font-montserrat tracking-[0.4em] uppercase text-brand-gold-500">
             Vous aimerez aussi
           </span>
           <h2 className="mt-2 text-3xl font-cormorant font-light">

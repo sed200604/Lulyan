@@ -41,7 +41,7 @@ export default function SizeGuideModal({ onClose }: SizeGuideModalProps) {
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-neutral-100">
             <div className="flex items-center gap-3">
-              <Ruler className="w-5 h-5 text-gold-500" />
+              <Ruler className="w-5 h-5 text-brand-gold-500" />
               <h2 className="text-sm font-montserrat tracking-widest uppercase text-neutral-900">
                 Guide des tailles
               </h2>
@@ -141,15 +141,15 @@ export default function SizeGuideModal({ onClose }: SizeGuideModalProps) {
             </div>
 
             {/* Model note */}
-            <div className="bg-gold-50/50 p-4 border border-gold-100 text-center">
-              <p className="text-xs font-montserrat text-gold-900 leading-relaxed">
+            <div className="bg-brand-gold-50/50 p-4 border border-brand-gold-100 text-center">
+              <p className="text-xs font-montserrat text-brand-gold-900 leading-relaxed">
                 <span className="font-semibold block mb-1">Notre conseil taille</span>
                 Les burkinis LULIYANE sont conçus avec un tissu stretch premium. Si vous hésitez entre deux tailles, nous vous conseillons de choisir la taille la plus grande pour plus de confort.
               </p>
             </div>
             
             <div className="text-center">
-              <a href="mailto:contact@luliyane.paris" className="text-xs font-montserrat text-neutral-500 hover:text-gold-500 underline underline-offset-4">
+              <a href="mailto:contact@luliyane.paris" className="text-xs font-montserrat text-neutral-500 hover:text-brand-gold-500 underline underline-offset-4">
                 Besoin d&apos;aide supplémentaire ? Contactez-nous
               </a>
             </div>

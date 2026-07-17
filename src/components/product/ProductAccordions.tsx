@@ -38,7 +38,7 @@ export function ProductAccordions({ product }: ProductAccordionsProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {product.features?.map((feature) => (
             <div key={feature} className="flex items-start gap-2">
-              <Check className="w-3.5 h-3.5 text-gold-500 mt-0.5 flex-shrink-0" />
+              <Check className="w-3.5 h-3.5 text-brand-gold-500 mt-0.5 flex-shrink-0" />
               <span className="text-sm">{feature}</span>
             </div>
           ))}
@@ -90,7 +90,7 @@ export function ProductAccordions({ product }: ProductAccordionsProps) {
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <span>France métropolitaine</span>
-                <span className="text-gold-500 font-medium">Offerte</span>
+                <span className="text-brand-gold-500 font-medium">Offerte</span>
               </div>
               <div className="flex justify-between">
                 <span>Livraison standard</span>
@@ -199,7 +199,7 @@ export function ProductAccordions({ product }: ProductAccordionsProps) {
               className="w-full flex items-center justify-between py-5 group"
             >
               <div className="flex items-center gap-3">
-                <item.icon className="w-4 h-4 text-gold-500" />
+                <item.icon className="w-4 h-4 text-brand-gold-500" />
                 <span className="text-sm font-montserrat tracking-[0.1em] uppercase text-neutral-800">
                   {item.title}
                 </span>
@@ -208,7 +208,7 @@ export function ProductAccordions({ product }: ProductAccordionsProps) {
                 animate={{ rotate: isOpen ? 45 : 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <Plus className="w-4 h-4 text-neutral-400 group-hover:text-gold-500 transition-colors" />
+                <Plus className="w-4 h-4 text-neutral-400 group-hover:text-brand-gold-500 transition-colors" />
               </motion.div>
             </button>
             

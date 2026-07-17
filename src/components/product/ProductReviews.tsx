@@ -19,7 +19,7 @@ export function ProductReviews({ product }: ProductReviewsProps) {
         
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="text-[10px] font-montserrat tracking-[0.4em] uppercase text-gold-500">
+          <span className="text-[10px] font-montserrat tracking-[0.4em] uppercase text-brand-gold-500">
             Témoignages
           </span>
           <h2 className="mt-2 text-3xl font-cormorant font-light">
@@ -38,7 +38,7 @@ export function ProductReviews({ product }: ProductReviewsProps) {
               {[1, 2, 3, 4, 5].map(s => (
                 <Star 
                   key={s} 
-                  className={`w-4 h-4 ${s <= Math.round(product.rating) ? 'text-gold-500' : 'text-neutral-200'}`} 
+                  className={`w-4 h-4 ${s <= Math.round(product.rating) ? 'text-brand-gold-500' : 'text-neutral-200'}`} 
                   fill="currentColor"
                 />
               ))}
@@ -66,7 +66,7 @@ export function ProductReviews({ product }: ProductReviewsProps) {
                     whileInView={{ width: `${(score / 5) * 100}%` }}
                     viewport={{ once: true }}
                     transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.1, 0, 1] }}
-                    className="h-full bg-gold-500 rounded-full"
+                    className="h-full bg-brand-gold-500 rounded-full"
                   />
                 </div>
                 <span className="text-xs font-montserrat text-neutral-800 w-8 text-right">
@@ -100,7 +100,7 @@ export function ProductReviews({ product }: ProductReviewsProps) {
                         key={s}
                         className={`w-3 h-3 ${
                           s <= review.rating 
-                            ? 'text-gold-500' 
+                            ? 'text-brand-gold-500' 
                             : 'text-neutral-200'
                         }`}
                         fill="currentColor"
