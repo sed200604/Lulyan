@@ -54,7 +54,7 @@ export const HIJAB_COLORS: HijabColor[] = [
     slug: 'blanc',
     name: 'Blanc',
     hex: '#F9F9F9',
-    imageUrl: '/gifts/hijab-bleu.jpg',
+    imageUrl: '/gifts/hijab-blanc.jpg',
     imageWidth: 1200,
     imageHeight: 1500,
     blurDataURL: (placeholders as any).bleu,

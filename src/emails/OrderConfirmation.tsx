@@ -131,7 +131,7 @@ export function OrderConfirmationEmail({
                       <Column>
                         <Text style={s.itemName}>Hijab d'Été (Édition Limitée)</Text>
                         <Text style={s.itemVariant}>Couleur : {gift.color}</Text>
-                        <Text style={s.itemQty}>Lié à : {gift.linked_to_burkini_sku}</Text>
+                        <Text style={s.itemQty}>Offert avec votre commande</Text>
                       </Column>
                       <Column align="right" style={{ verticalAlign: 'top' }}>
                         <Text style={s.itemPrice}>Offert</Text>

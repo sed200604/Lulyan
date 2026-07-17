@@ -69,16 +69,13 @@ export const useCartStore = create<CartState>()(
 
       addGiftItem: (product, color, linkedToItemId, originalValue) => {
         set((state) => {
-          const giftId = `GIFT-${linkedToItemId}`;
+          const giftId = `GIFT-HIJAB-SINGLE`;
           const existingItemIndex = state.items.findIndex(item => item.id === giftId);
-
-          const linkedItem = state.items.find(item => item.id === linkedToItemId);
-          const quantity = linkedItem ? linkedItem.quantity : 1;
 
           if (existingItemIndex > -1) {
             const newItems = [...state.items];
             newItems[existingItemIndex].color = color;
-            newItems[existingItemIndex].quantity = quantity;
+            newItems[existingItemIndex].image = product.colors.find(c => c.slug === color)?.image || '';
             return { items: newItems };
           }
 
@@ -92,9 +89,9 @@ export const useCartStore = create<CartState>()(
               image: product.colors.find(c => c.slug === color)?.image || '',
               size: 'Standard',
               color,
-              quantity,
+              quantity: 1, // Only 1 gift per order
               isGift: true,
-              linkedToItemId,
+              linkedToItemId: 'cart', // linked to the cart generally
               originalValue
             }]
           };
@@ -112,17 +109,22 @@ export const useCartStore = create<CartState>()(
       },
 
       removeItem: (itemId) => {
-        set((state) => ({
-          // Remove the item and any gift linked to it
-          items: state.items.filter(item => item.id !== itemId && item.linkedToItemId !== itemId)
-        }));
+        set((state) => {
+          const newItems = state.items.filter(item => item.id !== itemId);
+          // If no regular items left, remove the gift too
+          const hasRegularItems = newItems.some(i => !i.isGift);
+          if (!hasRegularItems) {
+            return { items: newItems.filter(i => !i.isGift) };
+          }
+          return { items: newItems };
+        });
       },
 
       updateQuantity: (itemId, quantity) => {
         const newQuantity = Math.max(1, Math.min(quantity, 10));
         set((state) => ({
           items: state.items.map(item => 
-            item.id === itemId || item.linkedToItemId === itemId
+            item.id === itemId
               ? { ...item, quantity: newQuantity }
               : item
           )

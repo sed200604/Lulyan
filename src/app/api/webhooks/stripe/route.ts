@@ -80,7 +80,7 @@ export async function POST(req: Request) {
       customerName: metadata.customerName || 'Client(e)',
       items: items.map((it: any) => ({
         name: it.n,
-        variant: 'Standard',
+        variant: it.c && it.s ? `${it.c} - Taille ${it.s}` : (it.c || it.s || 'Standard'),
         quantity: it.q,
         unitPrice: Number(it.p),
         lineTotal: Number(it.p) * Number(it.q),

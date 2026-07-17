@@ -16,43 +16,7 @@ export interface Product extends Omit<BaseProduct, 'images'> {
 }
 
 export const products: Product[] = [
-  {
-    id: 'GIFT-001',
-    slug: 'hijab-ete-2026',
-    name: 'Hijab d\'Été Édition Limitée',
-    subtitle: 'Offert avec votre burkini',
-    collection: 'luliyane-riviera',
-    category: 'riviera',
-    style: 'prestige',
-    price: 25.00,
-    currency: 'EUR',
-    colors: [
-      { name: 'Champagne', value: '#E5D3B3', slug: 'champagne' },
-      { name: 'Sable', value: '#C2B280', slug: 'sable' },
-      { name: 'Noir', value: '#0A0A0A', slug: 'noir' },
-      { name: 'Blanc', value: '#FFFFFF', slug: 'blanc' },
-    ],
-    sizes: [
-      { label: 'Taille Unique', value: 'Unique', inStock: true },
-    ],
-    images: [],
-    description: 'Hijab d\'été ultra léger.',
-    shortDescription: 'Hijab assorti.',
-    features: ['Séchage rapide'],
-    fabricDetails: 'Polyamide/élasthanne',
-    fabric: 'Polyamide/élasthanne',
-    careInstructions: ['Lavage à la main recommandé', 'Séchage à l\'ombre'],
-    inStock: true,
-    stockQuantity: 50,
-    isNew: true,
-    isFeatured: true,
-    rating: 4.9,
-    reviewCount: 124,
-    createdAt: '2024-03-01T00:00:00Z',
-    tags: [],
-    isGiftOnly: true,
-    
-  },
+
   {
     id: 'LR-001',
     slug: 'burkini-riviera-noir',
@@ -120,10 +84,10 @@ export const products: Product[] = [
     price: 25.00,
     currency: 'EUR',
     colors: [
-      { name: 'Champagne', value: '#E8D9BA', slug: 'champagne', image: '/gifts/hijab-champagne.jpg' },
+      { name: 'Champagne', value: '#E8D9BA', slug: 'champagne', image: '/gifts/hijab-sable.jpg' },
       { name: 'Noir Ivoire', value: '#1E1E1E', slug: 'noir-ivoire', image: '/gifts/hijab-noir.jpg' },
-      { name: 'Sable Doré', value: '#C4A67A', slug: 'sable-dore', image: '/gifts/hijab-sable.jpg' },
-      { name: 'Bleu Profond', value: '#1F3A5F', slug: 'bleu-profond', image: '/gifts/hijab-bleu.jpg' }
+      { name: 'Sable Doré', value: '#C4A67A', slug: 'sable-dore', image: '/gifts/hijab-champagne.jpg' },
+      { name: 'Blanc', value: '#FFFFFF', slug: 'blanc', image: '/gifts/hijab-blanc.jpg' }
     ],
     sizes: [
       { label: 'Standard', value: 'standard', inStock: true }

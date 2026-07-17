@@ -51,7 +51,7 @@ export async function POST(req: Request) {
         postalCode: customerDetails?.zipCode || '',
         country: customerDetails?.country || '',
         // Strip large data from items to fit metadata limit (500 chars)
-        itemsSummary: JSON.stringify(items.map((i: any) => ({ n: i.name || i.id, q: i.quantity, p: i.price, i: i.image || i.imageUrl }))).substring(0, 500),
+        itemsSummary: JSON.stringify(items.filter((i: any) => !i.isGift).map((i: any) => ({ n: i.name, q: i.quantity, p: i.price, i: i.image || i.imageUrl, s: i.size, c: i.color }))).substring(0, 500),
         gift_items: JSON.stringify(giftItems.map((i: any) => ({ 
           sku: i.slug || i.id, 
           color: i.color, 
@@ -121,7 +121,7 @@ export async function POST(req: Request) {
         // Insert order items
         const orderItemsToInsert = items.map((item: any) => ({
           order_id: order.id,
-          product_id: item.id,
+          product_id: item.productId || item.slug || item.id,
           size: item.size || null,
           color: item.color || null,
           quantity: item.quantity,
