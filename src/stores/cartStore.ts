@@ -89,7 +89,9 @@ export const useCartStore = create<CartState>()(
       
       applyPromoCode: (code) => {
         const upperCode = code.toUpperCase().trim();
-        if (upperCode === 'BIENVENUE' || upperCode === 'PM10') {
+        const isDynamicLuli = /^LULI[A-Z0-9]{4}$/.test(upperCode);
+        
+        if (upperCode === 'BIENVENUE' || upperCode === 'PM10' || isDynamicLuli) {
           set({ promoCode: upperCode });
           return { success: true, message: 'Code promo appliqué !' };
         }
@@ -109,7 +111,10 @@ export const useCartStore = create<CartState>()(
       promoDiscount: () => {
         const currentSubtotal = get().subtotal();
         const code = get().promoCode;
-        if (code === 'BIENVENUE') return currentSubtotal * 0.10; // 10%
+        if (!code) return 0;
+        
+        const isDynamicLuli = /^LULI[A-Z0-9]{4}$/.test(code);
+        if (code === 'BIENVENUE' || isDynamicLuli) return currentSubtotal * 0.10; // 10%
         if (code === 'PM10') return currentSubtotal * 0.20; // 20%
         return 0;
       },
