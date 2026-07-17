@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Product } from '@/types/product';
-import { formatPrice } from '@/lib/utils';
+import { formatEUR } from '@/lib/utils';
 import { Check } from 'lucide-react';
 
 interface StickyAddToCartProps {
@@ -68,7 +68,7 @@ export function StickyAddToCart({ product }: StickyAddToCartProps) {
                 {product.name}
               </p>
               <p className="text-sm font-montserrat font-medium text-neutral-900">
-                {formatPrice(product.price)}
+                {formatEUR(product.price)}
               </p>
             </div>
             

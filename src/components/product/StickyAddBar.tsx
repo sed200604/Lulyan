@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { Product } from '@/types/product';
+import { formatEUR } from '@/lib/utils';
 
 interface StickyAddBarProps {
   product: Product;
@@ -11,9 +12,7 @@ interface StickyAddBarProps {
 }
 
 export function StickyAddBar({ product, isVisible, onAdd, disabled }: StickyAddBarProps) {
-  const formatPrice = (price: number) => {
-    return price.toLocaleString('fr-FR', { minimumFractionDigits: 2 }).replace('.', ',') + ' €';
-  };
+
 
   return (
     <AnimatePresence>
@@ -30,7 +29,7 @@ export function StickyAddBar({ product, isVisible, onAdd, disabled }: StickyAddB
               {product.name}
             </span>
             <span className="font-sans text-[10px] text-[#666666]">
-              {formatPrice(product.price)}
+              {formatEUR(product.price)}
             </span>
           </div>
 

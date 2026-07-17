@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { FOOTER_LINKS, SITE_CONFIG } from '@/lib/constants';
 import { animations } from '@/lib/animations';
 import { trackEvent } from '@/lib/meta-capi';
+import { PaymentIconRow } from '@/components/icons/payment/PaymentIconRow';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -140,12 +141,8 @@ export function Footer() {
             <Link href="/confidentialite" className="hover:text-brand-gold-500 transition-colors">Confidentialité</Link>
           </div>
           
-          <div className="flex items-center gap-3 opacity-60 grayscale hover:grayscale-0 transition-all duration-300">
-            <div className="h-6 w-10 bg-white/10 rounded flex items-center justify-center text-[10px]">VISA</div>
-            <div className="h-6 w-10 bg-white/10 rounded flex items-center justify-center text-[10px]">MC</div>
-            <div className="h-6 w-10 bg-white/10 rounded flex items-center justify-center text-[10px]">AMEX</div>
-            <div className="h-6 w-10 bg-white/10 rounded flex items-center justify-center text-[10px]">PAYPAL</div>
-            <div className="h-6 w-10 bg-white/10 rounded flex items-center justify-center text-[10px]">APPLE</div>
+          <div className="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-300">
+            <PaymentIconRow size={24} iconClassName="text-brand-cream-50" />
           </div>
         </div>
       </div>

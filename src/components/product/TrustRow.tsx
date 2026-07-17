@@ -1,4 +1,5 @@
 import { Truck, RefreshCcw, Lock } from 'lucide-react';
+import { RETURN_POLICY_LINE } from '@/lib/config/policies';
 
 export function TrustRow() {
   return (
@@ -13,7 +14,7 @@ export function TrustRow() {
       <div className="flex items-center gap-3">
         <RefreshCcw className="w-4 h-4 text-[#C5A14E]" strokeWidth={2} />
         <span className="font-sans text-[12px] font-light text-[#1A1A1A]">
-          Retours gratuits sous 14 jours
+          {RETURN_POLICY_LINE}
         </span>
       </div>
       

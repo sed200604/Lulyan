@@ -20,8 +20,8 @@ export default function Page() {
       dangerouslySetInnerHTML={{ __html: `��<h1>Politique de Remboursement et de Retour</h1>
 <p>Chez LULIYANE PARIS, notre priorit%� absolue est votre enti%�re satisfaction. Nous mettons un point d&#39;honneur %� vous proposer des cr%�ations de la plus haute qualit%�. Toutefois, si un article ne vous donnait pas enti%�re satisfaction, notre politique de retour a %�t%� con%�ue pour vous offrir une exp%�rience simple et transparente, tout en respectant strictement vos droits en tant que consommateur.</p>
 <hr>
-<h2>1. Droit de r%�tractation (14 jours)</h2>
-<p>Conform%�ment aux dispositions de l&#39;article L221-18 du Code de la consommation, vous disposez d&#39;un d%�lai de quatorze (14) jours calendaires %� compter de la r%�ception de vos produits pour exercer votre droit de r%�tractation, sans avoir %� motiver votre d%�cision ni %� payer de p%�nalit%�.</p>
+<h2>1. Droit de r%�tractation (30 jours)</h2>
+<p>Conform%�ment aux dispositions de l&#39;article L221-18 du Code de la consommation, vous disposez d&#39;un d%�lai de trente (30) jours calendaires %� compter de la r%�ception de vos produits pour exercer votre droit de r%�tractation, sans avoir %� motiver votre d%�cision ni %� payer de p%�nalit%�.</p>
 <p>Dans le cas d&#39;une commande portant sur plusieurs biens livr%�s s%�par%�ment, le d%�lai court %� compter de la r%�ception du dernier bien.</p>
 <p>Pour exercer ce droit, vous pouvez nous contacter par e-mail %� l&#39;adresse <strong><a href="mailto:retours@luliyane.paris">retours@luliyane.paris</a></strong> ou utiliser le formulaire type de r%�tractation mis %� votre disposition ci-dessous.</p>
 <hr>
@@ -37,7 +37,7 @@ export default function Page() {
 <li>Le produit doit %�tre dans son <strong>%�tat d&#39;origine</strong> : non port%� (au-del%� du simple essayage), non lav%�, non alt%�r%�, et exempt de toute trace (maquillage, parfum, usure).</li>
 <li>Les <strong>%�tiquettes et l&#39;emballage d&#39;origine</strong> doivent %�tre intacts et attach%�s au produit.</li>
 <li><strong>Attention (Hygi%�ne)</strong> : Pour les burkinis et maillots de bain, la bande de protection d&#39;hygi%�ne doit %�tre <strong>pr%�sente et strictement intacte</strong>. Tout article retourn%� sans cette bande de protection sera syst%�matiquement refus%�.</li>
-<li>Le retour physique de l&#39;article doit %�tre effectu%� sans retard excessif et au plus tard quatorze (14) jours apr%�s que vous nous ayez communiqu%� votre d%�cision de r%�tractation.</li>
+<li>Le retour physique de l&#39;article doit %�tre effectu%� sans retard excessif et au plus tard trente (30) jours apr%�s que vous nous ayez communiqu%� votre d%�cision de r%�tractation.</li>
 </ul>
 <hr>
 <h2>4. Produits NON %�ligibles au retour</h2>
@@ -53,7 +53,7 @@ export default function Page() {
 <h2>5. Proc%�dure de retour</h2>
 <p>Pour effectuer un retour, merci de suivre ces %�tapes simples :</p>
 <ul>
-<li><strong>%�tape 1 :</strong> Contactez notre service client %� l&#39;adresse <strong><a href="mailto:retours@luliyane.paris">retours@luliyane.paris</a></strong> dans les 14 jours suivant la r%�ception, en pr%�cisant votre num%�ro de commande et l&#39;article concern%�.</li>
+<li><strong>%�tape 1 :</strong> Contactez notre service client %� l&#39;adresse <strong><a href="mailto:retours@luliyane.paris">retours@luliyane.paris</a></strong> dans les 30 jours suivant la r%�ception, en pr%�cisant votre num%�ro de commande et l&#39;article concern%�.</li>
 <li><strong>%�tape 2 :</strong> Vous recevrez sous 48h ouvr%�es un e-mail de confirmation contenant notre adresse de retour ainsi qu&#39;un num%�ro d&#39;autorisation de retour (RMA).</li>
 <li><strong>%�tape 3 :</strong> Emballez soigneusement le(s) produit(s) dans leur emballage d&#39;origine, avec toutes les %�tiquettes intactes.</li>
 <li><strong>%�tape 4 :</strong> Exp%�diez votre colis via un transporteur proposant un suivi (Colissimo suivi, Chronopost, Mondial Relay).</li>
@@ -74,13 +74,13 @@ export default function Page() {
 <h2>8. Remboursement</h2>
 <p>En cas d&#39;exercice du droit de r%�tractation dans les conditions pr%�cit%�es, nous proc%�derons au <strong>remboursement int%�gral</strong> des sommes vers%�es, y compris les frais de livraison initiaux (au tarif du mode de livraison standard propos%�).</p>
 <ul>
-<li><strong>D%�lai :</strong> Le remboursement sera effectu%� sans retard excessif, et au plus tard dans les <strong>quatorze (14) jours</strong> %� compter de la date %� laquelle nous sommes inform%�s de votre d%�cision de vous r%�tracter. Nous pouvons toutefois diff%�rer le remboursement jusqu&#39;%� la r%�ception du produit retourn%� ou jusqu&#39;%� ce que vous ayez fourni une preuve d&#39;exp%�dition du produit (la date retenue %�tant celle du premier de ces faits).</li>
+<li><strong>D%�lai :</strong> Le remboursement sera effectu%� sans retard excessif, et au plus tard dans les <strong>trente (30) jours</strong> %� compter de la date %� laquelle nous sommes inform%�s de votre d%�cision de vous r%�tracter. Nous pouvons toutefois diff%�rer le remboursement jusqu&#39;%� la r%�ception du produit retourn%� ou jusqu&#39;%� ce que vous ayez fourni une preuve d&#39;exp%�dition du produit (la date retenue %�tant celle du premier de ces faits).</li>
 <li><strong>Moyen de paiement :</strong> Le remboursement sera r%�alis%� en utilisant le <strong>m%�me moyen de paiement</strong> que celui utilis%� pour la transaction initiale (Carte Bancaire, PayPal, Apple Pay, Klarna), sauf accord expr%�s de votre part pour un autre moyen de paiement n&#39;occasionnant pas de frais pour vous.</li>
 <li>Vous recevrez un e-mail de confirmation d%�s que le remboursement aura %�t%� d%�clench%�.</li>
 </ul>
 <hr>
 <h2>9. %�changes</h2>
-<p>Nous comprenons qu&#39;il est parfois difficile de trouver la taille id%�ale du premier coup. %� titre de politique commerciale volontaire, LULIYANE PARIS vous offre la possibilit%� d&#39;%�changer un article contre une autre taille ou une autre couleur, dans un d%�lai de 14 jours apr%�s r%�ception.
+<p>Nous comprenons qu&#39;il est parfois difficile de trouver la taille id%�ale du premier coup. %� titre de politique commerciale volontaire, LULIYANE PARIS vous offre la possibilit%� d&#39;%�changer un article contre une autre taille ou une autre couleur, dans un d%�lai de 30 jours apr%�s r%�ception.
 Pour faciliter votre exp%�rience, <strong>les frais de retour pour un %�change sont exceptionnellement offerts</strong>. Si la nouvelle taille ou couleur souhait%�e n&#39;est malheureusement plus disponible en stock, un remboursement standard sera alors effectu%�.</p>
 <hr>
 <h2>10. Produits d%�fectueux ou non conformes</h2>

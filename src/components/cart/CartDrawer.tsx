@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/stores/cartStore';
 import { CartItem } from './CartItem';
 import { CartSummary } from './CartSummary';
+import { formatEUR } from '@/lib/utils';
 
 export function CartDrawer() {
   const { isOpen, setIsOpen, items, amountToFreeShipping } = useCartStore();
@@ -111,7 +112,7 @@ export function CartDrawer() {
                     <div className="flex items-center gap-2 mb-3">
                       {missingAmount > 0 ? (
                         <p className="font-montserrat text-sm text-brand-black-400">
-                          Il vous manque <span className="font-bold text-brand-black-500">{missingAmount.toFixed(2)} €</span> pour la livraison offerte
+                          Il vous manque <span className="font-bold text-brand-black-500">{formatEUR(missingAmount)}</span> pour la livraison offerte
                         </p>
                       ) : (
                         <p className="font-montserrat text-sm text-brand-gold-500 font-medium flex items-center gap-2">

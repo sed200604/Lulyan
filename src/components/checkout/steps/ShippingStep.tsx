@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Truck, Zap, Store } from 'lucide-react';
+import { formatEUR } from '@/lib/utils';
 
 export type ShippingMethod = 'standard' | 'express' | 'relais';
 
@@ -49,7 +50,7 @@ export function ShippingStep({ onNext, onBack, isFreeShipping }: ShippingStepPro
           const isSelected = selectedMethod === method.id;
           const displayPrice = method.id === 'standard' && isFreeShipping 
             ? 'Gratuit' 
-            : `${method.price.toFixed(2)} €`;
+            : formatEUR(method.price);
 
           return (
             <div key={method.id}>

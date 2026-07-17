@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { getProductBySlug } from '@/data/products';
 import { SITE_CONFIG, ROUTES, PRODUCT_SLUGS } from '@/lib/constants';
 import Link from 'next/link';
+import { preload } from 'react-dom';
 
 // Components
 import { ProductGallery } from '@/components/product/ProductGallery';
@@ -43,6 +44,11 @@ export default function ProductPage({ params }: Props) {
   
   if (!product) {
     notFound();
+  }
+
+  // Preload LCP hero image
+  if (product.images[0]?.src) {
+    preload(product.images[0].src, { as: 'image' });
   }
 
   const jsonLd = {

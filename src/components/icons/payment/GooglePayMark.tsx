@@ -1,10 +1,8 @@
-import React from 'react';
-
-export function GooglePayMark({ className = '' }: { className?: string }) {
+export function GooglePayMark({ className = '', style, ...props }: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 32 20" className={className} xmlns="http://www.w3.org/2000/svg">
-      <path d="M12.5 10.3c0-.6-.1-1.2-.2-1.7H6v3.2h3.6c-.1.9-.8 1.9-2 2.6v2h3.3c1.9-1.8 3-4.4 3-6.1zM6 16.5c1.8 0 3.3-.6 4.4-1.6l-3.3-2c-.6.4-1.4.7-2.3.7-1.8 0-3.3-1.2-3.8-2.8H-1v2.1c1.2 2.3 3.4 3.6 6 3.6zM2 10.8c-.2-.6-.2-1.2-.2-1.8s.1-1.2.2-1.8V5.1H-1C-1.5 6.1-1.8 7.3-1.8 8.5s.3 2.4.8 3.4l3-1.1zM6 4.5c1 0 1.9.3 2.6.9l1.9-1.9C9.4 2.3 7.8 1.5 6 1.5c-2.6 0-4.8 1.3-6 3.6l3 2.1c.5-1.6 2-2.7 3.8-2.7z" fill="currentColor" transform="translate(2, 1) scale(0.9)"/>
-      <path d="M17 14v-8h3.3c1.7 0 2.7.9 2.7 2.4 0 1.2-.7 2-1.9 2.3.9.2 1.5.8 1.5 1.7 0 1.1-.9 1.6-2.5 1.6H17zm1.3-4.5h1.8c.8 0 1.3-.4 1.3-1.1 0-.7-.5-1-1.3-1h-1.8v2.1zm0 3.4h2c.8 0 1.4-.3 1.4-1.1 0-.8-.6-1.1-1.4-1.1h-2v2.2zM26.5 14h-1.2l-3-6.5h1.3l2.2 5 2.2-5h1.3L26.5 14z" fill="currentColor"/>
+    <svg viewBox="0 0 100 60" fill="currentColor" className={className} style={style} aria-label="Google Pay" role="img" {...props}>
+      <rect width="100" height="60" rx="10" fill="currentColor" />
+      <text x="50" y="38" fontSize="20" fill="white" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">G Pay</text>
     </svg>
   );
 }

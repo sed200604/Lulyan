@@ -78,7 +78,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
-                initial={{ opacity: 0 }}
+                initial={currentIndex === 0 ? false : { opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}

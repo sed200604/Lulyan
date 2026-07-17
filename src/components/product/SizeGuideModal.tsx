@@ -3,12 +3,13 @@
 import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Ruler } from 'lucide-react';
+import { SizeGuideIllustration } from '../icons/SizeGuideIllustration';
 
-interface SizeGuideProps {
+interface SizeGuideModalProps {
   onClose: () => void;
 }
 
-export default function SizeGuide({ onClose }: SizeGuideProps) {
+export default function SizeGuideModal({ onClose }: SizeGuideModalProps) {
   // Lock scroll
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -65,20 +66,28 @@ export default function SizeGuide({ onClose }: SizeGuideProps) {
             </div>
 
             {/* Mesures instructions */}
-            <div className="space-y-4">
-              <div className="bg-neutral-50 p-4 rounded">
-                <h4 className="text-xs font-montserrat font-semibold text-neutral-900 mb-1">1. Tour de poitrine</h4>
-                <p className="text-xs font-montserrat text-neutral-600">Mesurez à l&apos;endroit le plus fort de votre poitrine, en gardant le ruban bien horizontal.</p>
+            <div className="flex gap-6 items-center">
+              <div className="w-1/3 flex-shrink-0">
+                <SizeGuideIllustration className="w-full h-auto" />
               </div>
-              
-              <div className="bg-neutral-50 p-4 rounded">
-                <h4 className="text-xs font-montserrat font-semibold text-neutral-900 mb-1">2. Tour de taille</h4>
-                <p className="text-xs font-montserrat text-neutral-600">Mesurez au creux de votre taille, l&apos;endroit le plus étroit, juste au-dessus du nombril.</p>
-              </div>
-              
-              <div className="bg-neutral-50 p-4 rounded">
-                <h4 className="text-xs font-montserrat font-semibold text-neutral-900 mb-1">3. Tour de hanches</h4>
-                <p className="text-xs font-montserrat text-neutral-600">Mesurez à l&apos;endroit le plus fort de vos hanches, en gardant le mètre bien horizontal.</p>
+              <div className="w-2/3 space-y-4">
+                <div className="bg-neutral-50 p-4 rounded relative">
+                  <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-brand-gold-500 text-white flex items-center justify-center text-[10px] font-bold">1</div>
+                  <h4 className="text-xs font-montserrat font-semibold text-neutral-900 mb-1 pl-2">Tour de poitrine</h4>
+                  <p className="text-xs font-montserrat text-neutral-600 pl-2">Mesurez à l&apos;endroit le plus fort, ruban bien horizontal.</p>
+                </div>
+                
+                <div className="bg-neutral-50 p-4 rounded relative">
+                  <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-brand-gold-500 text-white flex items-center justify-center text-[10px] font-bold">2</div>
+                  <h4 className="text-xs font-montserrat font-semibold text-neutral-900 mb-1 pl-2">Tour de taille</h4>
+                  <p className="text-xs font-montserrat text-neutral-600 pl-2">Mesurez au creux de votre taille, l&apos;endroit le plus étroit.</p>
+                </div>
+                
+                <div className="bg-neutral-50 p-4 rounded relative">
+                  <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-brand-gold-500 text-white flex items-center justify-center text-[10px] font-bold">3</div>
+                  <h4 className="text-xs font-montserrat font-semibold text-neutral-900 mb-1 pl-2">Tour de hanches</h4>
+                  <p className="text-xs font-montserrat text-neutral-600 pl-2">Mesurez à l&apos;endroit le plus fort de vos hanches.</p>
+                </div>
               </div>
             </div>
 

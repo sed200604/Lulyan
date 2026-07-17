@@ -6,6 +6,7 @@ import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import { Product } from '@/types/product';
 import { useCartStore } from '@/stores/cartStore';
+import { formatEUR } from '@/lib/utils';
 
 interface QuickViewModalProps {
   product: Product | null;
@@ -28,10 +29,7 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
     setCurrentImageIdx((prev) => (prev === 0 ? product.images.length - 1 : prev - 1));
   };
 
-  // Format price (replace dot with comma, add non-breaking space for €)
-  const formatPrice = (price: number) => {
-    return price.toFixed(2).replace('.', ',') + '\u00A0€';
-  };
+
 
   return (
     <AnimatePresence>
@@ -111,7 +109,7 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
                     {product.name}
                   </h3>
                   <div className="font-sans text-[14px] font-medium tracking-[0.04em] text-[#1A1A1A]">
-                    {formatPrice(product.price)}
+                    {formatEUR(product.price)}
                   </div>
                 </div>
 

@@ -1,12 +1,7 @@
 'use client';
 
 import React from 'react';
-import { VisaMark } from '../icons/payment/VisaMark';
-import { MastercardMark } from '../icons/payment/MastercardMark';
-import { AmexMark } from '../icons/payment/AmexMark';
-import { CBMark } from '../icons/payment/CBMark';
-import { ApplePayMark } from '../icons/payment/ApplePayMark';
-import { GooglePayMark } from '../icons/payment/GooglePayMark';
+import { PaymentIconRow } from '../icons/payment/PaymentIconRow';
 
 interface TrustBadgeProps {
   variant: 'editorial' | 'marks' | 'minimal';
@@ -44,13 +39,8 @@ export function TrustBadge({ variant, className = '' }: TrustBadgeProps) {
         </div>
 
         {/* Monochrome brand marks */}
-        <div className="flex flex-wrap justify-center items-center gap-4 opacity-80">
-          <VisaMark className="h-6 fill-neutral-800" />
-          <MastercardMark className="h-6 fill-neutral-800" />
-          <AmexMark className="h-6 fill-neutral-800" />
-          <CBMark className="h-6 fill-neutral-800" />
-          <ApplePayMark className="h-6 fill-neutral-800" />
-          <GooglePayMark className="h-6 fill-neutral-800" />
+        <div className="opacity-80">
+          <PaymentIconRow size={24} />
         </div>
 
         {/* Subtle attribution */}

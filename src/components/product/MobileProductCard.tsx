@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import { Heart, Eye } from 'lucide-react';
 import { Product } from '@/types/product';
 import { useWishlistStore } from '@/stores/wishlistStore';
+import { formatEUR } from '@/lib/utils';
 
 interface MobileProductCardProps {
   product: Product;
@@ -39,9 +40,7 @@ export function MobileProductCard({ product, onQuickView }: MobileProductCardPro
     onQuickView(product);
   };
 
-  const formatPrice = (price: number) => {
-    return price.toFixed(2).replace('.', ',') + '\u00A0€';
-  };
+
 
   return (
     <div className="flex flex-col w-full group">
@@ -111,11 +110,11 @@ export function MobileProductCard({ product, onQuickView }: MobileProductCardPro
         </p>
         <div className="flex items-center gap-2 mt-1">
           <span className="font-sans text-[11px] font-normal text-[#1A1A1A]">
-            {formatPrice(product.price)}
+            {formatEUR(product.price)}
           </span>
           {product.compareAtPrice && product.compareAtPrice > product.price && (
             <span className="font-sans text-[10px] font-normal text-[#5A5247] line-through">
-              {formatPrice(product.compareAtPrice)}
+              {formatEUR(product.compareAtPrice)}
             </span>
           )}
         </div>

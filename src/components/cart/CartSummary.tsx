@@ -4,6 +4,8 @@ import { useCartStore } from '@/stores/cartStore';
 import { useRouter } from 'next/navigation';
 import { trackEvent } from '@/lib/meta-capi';
 import { TrustBadge } from '../checkout/TrustBadge';
+import { PaymentIconRow } from '@/components/icons/payment/PaymentIconRow';
+import { formatEUR } from '@/lib/utils';
 
 interface CartSummaryProps {
   variant?: 'drawer' | 'page' | 'checkout';
@@ -164,6 +166,13 @@ export function CartSummary({ variant = 'page' }: CartSummaryProps) {
               Plus que <span className="text-brand-gold-500 font-medium">{amountToFreeShipping().toFixed(2)} €</span> pour la livraison offerte
             </p>
           )}
+
+          <div className="mt-6 flex flex-col items-center gap-3">
+            <span className="text-[10px] uppercase tracking-[0.2em] text-[#888]">
+              PAIEMENT SÉCURISÉ
+            </span>
+            <PaymentIconRow size={20} className="justify-center opacity-70" />
+          </div>
         </>
       )}
     </div>

@@ -1,3 +1,5 @@
+import { formatEUR } from '@/lib/utils';
+
 interface PrimaryATCProps {
   price: number;
   onClick: () => void;
@@ -5,9 +7,7 @@ interface PrimaryATCProps {
 }
 
 export function PrimaryATC({ price, onClick, disabled }: PrimaryATCProps) {
-  const formatPrice = (price: number) => {
-    return price.toLocaleString('fr-FR', { minimumFractionDigits: 2 }).replace('.', ',') + ' €';
-  };
+
 
   return (
     <div className="w-full mb-3">
@@ -18,8 +18,11 @@ export function PrimaryATC({ price, onClick, disabled }: PrimaryATCProps) {
           ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#1A1A1A]/90 animate-cta-breathe hover:animate-none border border-[#1A1A1A] hover:border-transparent'}
         `}
       >
-        AJOUTER AU PANIER • {formatPrice(price)}
+        AJOUTER AU PANIER • {formatEUR(price)}
       </button>
+      <p className="mt-3 text-center text-[11px] text-neutral-500 font-montserrat tracking-wide">
+        Expédition en France Métropolitaine uniquement.
+      </p>
     </div>
   );
 }

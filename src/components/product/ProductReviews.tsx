@@ -2,6 +2,7 @@
 
 import { Star, BadgeCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { Product } from '@/types/product';
 import { mockReviews } from '@/data/products';
 
@@ -121,6 +122,23 @@ export function ProductReviews({ product }: ProductReviewsProps) {
               <p className="mt-3 text-sm font-montserrat text-neutral-700 leading-relaxed">
                 {review.text}
               </p>
+              
+              {/* Images */}
+              {review.images && review.images.length > 0 && (
+                <div className="mt-4 flex gap-3 overflow-x-auto pb-2 snap-x">
+                  {review.images.map((img, idx) => (
+                    <div key={idx} className="relative w-20 h-24 flex-shrink-0 rounded-sm overflow-hidden snap-start cursor-pointer hover:opacity-90 transition-opacity">
+                      <Image
+                        src={img}
+                        alt={`Photo de l'avis ${idx + 1}`}
+                        fill
+                        className="object-cover"
+                        sizes="80px"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>

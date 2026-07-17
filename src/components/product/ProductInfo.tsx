@@ -5,13 +5,13 @@ import { Star, Check, Heart, Share2, Truck, RotateCcw, Shield, Droplets } from '
 import { motion, AnimatePresence } from 'framer-motion';
 import { Product } from '@/types/product';
 import { SITE_CONFIG } from '@/lib/constants';
-import { formatPrice } from '@/lib/utils';
+import { formatEUR } from '@/lib/utils';
 import dynamic from 'next/dynamic';
 import { useCartStore } from '@/stores/cartStore';
 import { trackViewContent, trackAddToCart } from '@/lib/pixel';
 
-const SizeGuide = dynamic(() => import('@/components/product/SizeGuide'), { ssr: false });
 const ShareDrawer = dynamic(() => import('@/components/product/ShareDrawer'), { ssr: false });
+const SizeGuideModal = dynamic(() => import('@/components/product/SizeGuideModal'), { ssr: false });
 import { TrustBadge } from '@/components/checkout/TrustBadge';
 
 interface ProductInfoProps {
@@ -119,16 +119,16 @@ export function ProductInfo({ product }: ProductInfoProps) {
       {/* ─── PRIX ─── */}
       <div className="mt-4 flex items-baseline gap-3">
         <span className="text-2xl font-montserrat font-light text-neutral-900">
-          {formatPrice(product.price)}
+          {formatEUR(product.price)}
         </span>
         {product.compareAtPrice && (
           <span className="text-sm font-montserrat text-neutral-400 line-through">
-            {formatPrice(product.compareAtPrice)}
+            {formatEUR(product.compareAtPrice)}
           </span>
         )}
       </div>
       <p className="mt-1 text-xs font-montserrat text-neutral-500">
-        Ou 3× {formatPrice(product.price / 3)} sans frais
+        Ou 3× {formatEUR(product.price / 3)} sans frais
       </p>
 
       {/* ─── SÉLECTEUR DE COULEUR ─── */}
@@ -242,7 +242,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
               >
-                Ajouter au panier — {formatPrice(product.price)}
+                Ajouter au panier — {formatEUR(product.price)}
               </motion.span>
             )}
           </AnimatePresence>
@@ -290,7 +290,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
       </div>
 
       {/* Drawers */}
-      {showSizeGuide && <SizeGuide onClose={() => setShowSizeGuide(false)} />}
+      {showSizeGuide && <SizeGuideModal onClose={() => setShowSizeGuide(false)} />}
       {showShare && <ShareDrawer url={typeof window !== 'undefined' ? window.location.href : ''} onClose={() => setShowShare(false)} />}
     </div>
   );

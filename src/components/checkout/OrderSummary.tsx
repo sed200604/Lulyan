@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/stores/cartStore';
 import { ChevronDown } from 'lucide-react';
+import { formatEUR } from '@/lib/utils';
 
 export function OrderSummary({ variant = 'desktop' }: { variant?: 'mobile' | 'desktop' }) {
   const [isExpanded, setIsExpanded] = useState(false);

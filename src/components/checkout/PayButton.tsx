@@ -2,6 +2,7 @@
 
 import { Loader2 } from 'lucide-react';
 import { useCartStore } from '@/stores/cartStore';
+import { formatEUR } from '@/lib/utils';
 
 interface PayButtonProps {
   isProcessing: boolean;
@@ -33,7 +34,7 @@ export function PayButton({ isProcessing, isDisabled, onClick }: PayButtonProps)
         ) : (
           <div className="flex flex-col items-center justify-center w-full h-full">
             <div className="flex items-center justify-center gap-2">
-              <span className="uppercase">PAYER {total.toFixed(2).replace('.', ',')} €</span>
+              <span className="uppercase">PAYER {formatEUR(total)}</span>
               <span className="text-[16px] transition-transform duration-200 group-hover:translate-x-1">
                 →
               </span>

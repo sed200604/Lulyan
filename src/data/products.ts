@@ -691,6 +691,7 @@ export interface Review {
   verified: boolean;
   size?: string;
   text: string;
+  images?: string[];
 }
 
 export const mockReviews: Review[] = [
@@ -702,6 +703,7 @@ export const mockReviews: Review[] = [
     verified: true,
     size: 'M',
     text: 'Parfait. La matière est incroyable et la coupe très flatteuse. Je recommande vivement pour celles qui cherchent l\'élégance.',
+    images: ['/images/products/product-1/photo 1.webp', '/images/products/product-1/vue-26.webp'],
   },
   {
     id: '2',

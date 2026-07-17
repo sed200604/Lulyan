@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { Minus, Plus, X } from 'lucide-react';
 import { useCartStore } from '@/stores/cartStore';
 import { CartItem as CartItemType } from '@/types/product';
+import { formatEUR } from '@/lib/utils';
 
 interface CartItemProps {
   item: CartItemType;

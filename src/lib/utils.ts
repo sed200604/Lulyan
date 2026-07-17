@@ -6,11 +6,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-// Price formatter (French locale)
-export function formatPrice(amount: number, currency: string = 'EUR'): string {
+// Currency formatter (French locale)
+export function formatEUR(amount: number): string {
   return new Intl.NumberFormat('fr-FR', {
     style: 'currency',
-    currency,
+    currency: 'EUR',
     minimumFractionDigits: 2,
   }).format(amount);
 }

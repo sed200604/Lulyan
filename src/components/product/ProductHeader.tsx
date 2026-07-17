@@ -1,5 +1,6 @@
 import { Star } from 'lucide-react';
 import { Product } from '@/types/product';
+import { formatEUR } from '@/lib/utils';
 
 interface ProductHeaderProps {
   product: Product;
@@ -11,12 +12,6 @@ export function ProductHeader({ product }: ProductHeaderProps) {
   if (product.isNew) mainTag = 'NOUVEAUTÉ';
   else if (product.tags.includes('best-seller')) mainTag = 'BEST-SELLER';
   else if (product.tags.includes('edition-limitee')) mainTag = 'ÉDITION LIMITÉE';
-
-  const formatPrice = (price: number) => {
-    return price.toLocaleString('fr-FR', { minimumFractionDigits: 2 }).replace('.', ',') + ' €';
-  };
-
-  const monthlyPrice = (product.price / 3).toLocaleString('fr-FR', { minimumFractionDigits: 2 }).replace('.', ',');
 
   const scrollToReviews = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -55,13 +50,13 @@ export function ProductHeader({ product }: ProductHeaderProps) {
       {/* Price */}
       <div className="mb-2">
         <span className="font-sans text-[18px] font-normal text-[#1A1A1A]">
-          {formatPrice(product.price)}
+          {formatEUR(product.price)}
         </span>
       </div>
 
       {/* Payment installment */}
       <div className="flex items-center gap-1 font-sans text-[11px] text-[#666666] mb-6">
-        <span>Ou 3x {monthlyPrice} € sans frais avec</span>
+        <span>Ou 3x {formatEUR(product.price / 3)} € sans frais avec</span>
         <span className="font-bold text-[#1A1A1A] tracking-wide">alma</span>
       </div>
 

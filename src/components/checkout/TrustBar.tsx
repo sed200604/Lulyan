@@ -1,11 +1,6 @@
 'use client';
 
-import { VisaMark } from '@/components/icons/payment/VisaMark';
-import { MastercardMark } from '@/components/icons/payment/MastercardMark';
-import { AmexMark } from '@/components/icons/payment/AmexMark';
-import { CBMark } from '@/components/icons/payment/CBMark';
-import { ApplePayMark } from '@/components/icons/payment/ApplePayMark';
-import { GooglePayMark } from '@/components/icons/payment/GooglePayMark';
+import { PaymentIconRow } from '@/components/icons/payment/PaymentIconRow';
 
 export function TrustBar() {
   return (
@@ -20,13 +15,8 @@ export function TrustBar() {
       </div>
 
       {/* Brand Marks */}
-      <div className="flex flex-wrap justify-center items-center gap-4 mb-6 text-neutral-800">
-        <VisaMark className="h-6 w-auto" />
-        <MastercardMark className="h-6 w-auto" />
-        <AmexMark className="h-6 w-auto" />
-        <CBMark className="h-6 w-auto" />
-        <ApplePayMark className="h-6 w-auto" />
-        <GooglePayMark className="h-6 w-auto" />
+      <div className="mb-6">
+        <PaymentIconRow size={24} />
       </div>
 
       {/* Trust Line */}

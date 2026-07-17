@@ -15,7 +15,7 @@ const FAQS = [
   },
   {
     question: "Puis-je retourner ou échanger mon burkini ?",
-    answer: "Oui, vous disposez de 14 jours après réception pour nous retourner votre article, à condition qu'il n'ait pas été porté (essayage autorisé), lavé, et que les étiquettes soient toujours attachées pour des raisons d'hygiène."
+    answer: `Oui, vous disposez de 30 jours à compter de la réception pour nous retourner votre article, à condition qu'il n'ait pas été porté (essayage autorisé), lavé, et que les étiquettes soient toujours attachées pour des raisons d'hygiène.`
   },
   {
     question: "Comment choisir ma taille ?",
