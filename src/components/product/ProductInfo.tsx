@@ -106,7 +106,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
           <div className="flex items-center gap-2 text-sm text-brand-black-600">
             <div className="flex">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className={`w-3.5 h-3.5 ${i < Math.round(product.rating) ? 'fill-gold-500 text-gold-500' : 'text-neutral-200'}`} />
+                <Star key={i} className={`w-3.5 h-3.5 ${i < Math.round(product.rating) ? 'text-gold-500' : 'text-neutral-200'}`} fill="currentColor" />
               ))}
             </div>
             <span className="text-xs font-montserrat text-neutral-500 group-hover:text-gold-500 transition-colors">

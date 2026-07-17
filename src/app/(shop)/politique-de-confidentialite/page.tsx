@@ -6,21 +6,13 @@ export const metadata = {
 };
 
 export default function PrivacyPage() {
-  const isDev = process.env.NODE_ENV === 'development';
-  const hasPlaceholders = true;
-
   return (
     <>
-      {isDev && hasPlaceholders && (
-        <div className="bg-amber-100 border border-amber-300 text-amber-900 p-3 text-sm text-center">
-          ⚠️ Cette page contient des placeholders. Éditez avant de publier.
-        </div>
-      )}
-      <LegalPageLayout title="Politique de Confidentialité" lastUpdated="[Date]">
+      <LegalPageLayout title="Politique de Confidentialité" lastUpdated="17 Juillet 2026">
         <h2>1. Identité du responsable de traitement</h2>
         <p>
-          Le responsable du traitement des données personnelles collectées sur le site luliyan-paris.com est la société <strong>[LULIYANE PARIS SAS]</strong>.<br />
-          Pour toute question relative à la protection de vos données, vous pouvez nous contacter à l&apos;adresse suivante : <strong>privacy@luliyan-paris.com</strong>.
+          Le responsable du traitement des données personnelles collectées sur le site luliyan-paris.com est la société <strong>LULIYANE PARIS</strong>.<br />
+          Pour toute question relative à la protection de vos données, vous pouvez nous contacter à l&apos;adresse suivante : <strong>admin@luliyan-paris.com</strong>.
         </p>
 
         <h2>2. Données collectées</h2>
@@ -85,7 +77,7 @@ export default function PrivacyPage() {
 
         <h2>8. Exercice de vos droits</h2>
         <p>
-          Pour exercer l&apos;un de ces droits, veuillez nous envoyer un e-mail à <strong>privacy@luliyan-paris.com</strong>, en joignant, si nécessaire, un justificatif d&apos;identité. Nous nous engageons à vous répondre dans un délai d&apos;un mois.
+          Pour exercer l&apos;un de ces droits, veuillez nous envoyer un e-mail à <strong>admin@luliyan-paris.com</strong>, en joignant, si nécessaire, un justificatif d&apos;identité. Nous nous engageons à vous répondre dans un délai d&apos;un mois.
         </p>
         <p>
           Si vous estimez, après nous avoir contactés, que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la CNIL (3 Place de Fontenoy, 75007 Paris - <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer">cnil.fr</a>).

@@ -40,7 +40,7 @@ export function ProductHeader({ product }: ProductHeaderProps) {
         >
           <div className="flex gap-0.5 text-[#1A1A1A]">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-3 h-3 fill-[#1A1A1A] text-[#1A1A1A]" />
+              <Star key={i} className="w-3 h-3 text-[#1A1A1A]" fill="currentColor" />
             ))}
           </div>
           {product.rating} (<span className="underline decoration-[#CCCCCC] underline-offset-2">{product.reviewCount} avis</span>)

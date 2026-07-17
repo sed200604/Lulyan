@@ -29,11 +29,10 @@ export const ROUTES = {
   ACCOUNT_ORDERS: '/account/orders',
   ACCOUNT_WISHLIST: '/account/wishlist',
 
-  // ─── Légal ───────────────────────────────────────────────
   CGV: '/cgv',
   MENTIONS_LEGALES: '/mentions-legales',
-  CONFIDENTIALITE: '/confidentialite',
-  COOKIES: '/cookies',
+  CONFIDENTIALITE: '/politique-de-confidentialite',
+  COOKIES: '/politique-de-confidentialite', // Re-route cookies to privacy policy since we don't have a separate page
 } as const;
 
 // ═══════════════════════════════════════════════════════════

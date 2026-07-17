@@ -38,7 +38,8 @@ export function ProductReviews({ product }: ProductReviewsProps) {
               {[1, 2, 3, 4, 5].map(s => (
                 <Star 
                   key={s} 
-                  className={`w-4 h-4 ${s <= Math.round(product.rating) ? 'fill-gold-500 text-gold-500' : 'text-neutral-200'}`} 
+                  className={`w-4 h-4 ${s <= Math.round(product.rating) ? 'text-gold-500' : 'text-neutral-200'}`} 
+                  fill="currentColor"
                 />
               ))}
             </div>
@@ -99,9 +100,10 @@ export function ProductReviews({ product }: ProductReviewsProps) {
                         key={s}
                         className={`w-3 h-3 ${
                           s <= review.rating 
-                            ? 'fill-gold-500 text-gold-500' 
+                            ? 'text-gold-500' 
                             : 'text-neutral-200'
                         }`}
+                        fill="currentColor"
                       />
                     ))}
                   </div>

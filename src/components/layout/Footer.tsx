@@ -138,7 +138,7 @@ export function Footer() {
             <span className="hidden sm:inline">|</span>
             <Link href="/cgv" className="hover:text-brand-gold-500 transition-colors">CGV</Link>
             <Link href="/mentions-legales" className="hover:text-brand-gold-500 transition-colors">Mentions légales</Link>
-            <Link href="/confidentialite" className="hover:text-brand-gold-500 transition-colors">Confidentialité</Link>
+            <Link href="/politique-de-confidentialite" className="hover:text-brand-gold-500 transition-colors">Confidentialité</Link>
           </div>
           
           <div className="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-300">

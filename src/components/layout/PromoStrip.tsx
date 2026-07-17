@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 const MESSAGES = [
   "✦ LIVRAISON OFFERTE EN FRANCE",
   "✦ PAIEMENT EN 3X SANS FRAIS DISPONIBLE",
-  "✦ RETOURS GRATUITS SOUS 14 JOURS"
+  "✦ RETOURS GRATUITS SOUS 30 JOURS"
 ];
 
 export function PromoStrip() {

@@ -8,20 +8,12 @@ export const metadata = {
 };
 
 export default function CGVPage() {
-  const isDev = process.env.NODE_ENV === 'development';
-  const hasPlaceholders = true;
-
   return (
     <>
-      {isDev && hasPlaceholders && (
-        <div className="bg-amber-100 border border-amber-300 text-amber-900 p-3 text-sm text-center">
-          ⚠️ Cette page contient des placeholders. Éditez avant de publier.
-        </div>
-      )}
-      <LegalPageLayout title="Conditions Générales de Vente" lastUpdated="[Date]">
+      <LegalPageLayout title="Conditions Générales de Vente" lastUpdated="17 Juillet 2026">
         <h2>1. Identification du vendeur</h2>
         <p>
-          Les présentes Conditions Générales de Vente (CGV) sont conclues entre, d&apos;une part, la société [LULIYANE PARIS SAS] (ci-après &quot;le Vendeur&quot;), dont les coordonnées complètes figurent sur la page <Link href="/mentions-legales" className="underline hover:text-neutral-800">Mentions Légales</Link>, et d&apos;autre part, toute personne physique non commerçante (ci-après &quot;le Client&quot;) souhaitant effectuer un achat via le site luliyan-paris.com.
+          Les présentes Conditions Générales de Vente (CGV) sont conclues entre, d&apos;une part, la société LULIYANE PARIS (ci-après &quot;le Vendeur&quot;), dont les coordonnées complètes figurent sur la page <Link href="/mentions-legales" className="underline hover:text-neutral-800">Mentions Légales</Link>, et d&apos;autre part, toute personne physique non commerçante (ci-après &quot;le Client&quot;) souhaitant effectuer un achat via le site luliyan-paris.com.
         </p>
 
         <h2>2. Champ d&apos;application</h2>
@@ -95,20 +87,20 @@ export default function CGVPage() {
 
         <h2>12. Service client</h2>
         <p>
-          Pour toute question, réclamation ou suivi de commande, notre service client est à votre disposition par e-mail à l&apos;adresse suivante : <strong>contact@luliyan-paris.com</strong>. Nous nous engageons à vous répondre dans les plus brefs délais, du lundi au vendredi de [Horaires].
+          Pour toute question, réclamation ou suivi de commande, notre service client est à votre disposition par e-mail à l&apos;adresse suivante : <strong>admin@luliyan-paris.com</strong>. Nous nous engageons à vous répondre dans les plus brefs délais, du lundi au vendredi de 9h00 à 18h00.
         </p>
 
         <h2>13. Médiation</h2>
         <p>
           Conformément aux articles L612-1 et suivants du Code de la consommation, le Client a le droit de recourir gratuitement à un médiateur de la consommation en vue de la résolution amiable du litige qui l&apos;opposerait au Vendeur. Le Vendeur a désigné comme médiateur de la consommation :<br />
-          <strong>[Nom du médiateur, ex: CM2C ou MEDICYS]</strong><br />
-          [Adresse postale du médiateur]<br />
-          [Site internet du médiateur]
+          <strong>CM2C</strong><br />
+          14 rue Saint Jean 75017 Paris<br />
+          <a href="https://cm2c.net" target="_blank" rel="noopener noreferrer">https://cm2c.net</a>
         </p>
 
         <h2>14. Droit applicable &amp; juridiction</h2>
         <p>
-          Les présentes CGV sont soumises au droit français. En cas de litige, une solution amiable sera recherchée avant toute action judiciaire. À défaut de résolution amiable, les tribunaux français seront seuls compétents. Pour les litiges entre professionnels (B2B), la compétence expresse est attribuée au Tribunal de Commerce de [Ville]. Pour les litiges avec des consommateurs, le Client peut saisir, à son choix, la juridiction du lieu où il demeurait au moment de la conclusion du contrat ou de la survenance du fait dommageable.
+          Les présentes CGV sont soumises au droit français. En cas de litige, une solution amiable sera recherchée avant toute action judiciaire. À défaut de résolution amiable, les tribunaux français seront seuls compétents. Pour les litiges entre professionnels (B2B), la compétence expresse est attribuée au Tribunal de Commerce de Paris. Pour les litiges avec des consommateurs, le Client peut saisir, à son choix, la juridiction du lieu où il demeurait au moment de la conclusion du contrat ou de la survenance du fait dommageable.
         </p>
 
         <h2>15. Modification des CGV</h2>

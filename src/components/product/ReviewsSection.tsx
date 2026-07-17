@@ -43,7 +43,7 @@ export function ReviewsSection({ product }: ReviewsSectionProps) {
           <div className="flex flex-col">
             <div className="flex text-[#C5A14E] mb-1">
               {[1, 2, 3, 4, 5].map((star) => (
-                <Star key={star} className="w-4 h-4 fill-current" strokeWidth={0} />
+                <Star key={star} className="w-4 h-4" fill="currentColor" strokeWidth={0} />
               ))}
             </div>
             <span className="font-sans text-[11px] text-[#666666]">
@@ -96,7 +96,7 @@ export function ReviewsSection({ product }: ReviewsSectionProps) {
             
             <div className="flex text-[#C5A14E] mb-3">
               {[...Array(review.rating)].map((_, i) => (
-                <Star key={i} className="w-3 h-3 fill-current" strokeWidth={0} />
+                <Star key={i} className="w-3 h-3" fill="currentColor" strokeWidth={0} />
               ))}
             </div>
 
