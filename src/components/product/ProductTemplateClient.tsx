@@ -8,10 +8,12 @@ import { ProductHeader } from './ProductHeader';
 import { CredibilityPills } from './CredibilityPills';
 import { ColorPicker } from './ColorPicker';
 import { SizePicker } from './SizePicker';
+import { SizeFinderPrompt } from './SizeFinderPrompt';
 import { PrimaryATC } from './PrimaryATC';
 import { SecondaryActions } from './SecondaryActions';
 import { TrustRow } from './TrustRow';
 import { InfoAccordions } from './InfoAccordions';
+import { BurkiniObjectionSection } from './BurkiniObjectionSection';
 import { CrossSell } from './CrossSell';
 import { RelatedCarousel } from './RelatedCarousel';
 import { ReviewsSection } from './ReviewsSection';
@@ -114,12 +116,19 @@ export function ProductTemplateClient({ product, crossSellProducts, relatedProdu
     return 0;
   });
 
+  // Fallback map if product.media is missing
+  const mediaList = product.media || sortedImages.map(img => ({
+    type: img.isVideo ? 'video' : 'image',
+    src: img.src,
+    alt: img.alt
+  }));
+
   return (
     <>
       <div className="flex flex-col lg:flex-row gap-0 lg:gap-16 items-start px-0 lg:px-container">
         {/* Left Column: Gallery (Full width on mobile, 55% on desktop) */}
         <div className="w-full lg:w-[55%] lg:sticky lg:top-24">
-          <ProductGallery images={sortedImages} />
+          <ProductGallery media={mediaList} productName={product.name} />
         </div>
 
         {/* Right Column: Info (Padded on mobile, 45% on desktop) */}
@@ -144,6 +153,8 @@ export function ProductTemplateClient({ product, crossSellProducts, relatedProdu
             />
           )}
 
+          <SizeFinderPrompt />
+
           <div ref={atcRef}>
             <PrimaryATC 
               price={product.price} 
@@ -154,6 +165,8 @@ export function ProductTemplateClient({ product, crossSellProducts, relatedProdu
           <SecondaryActions product={product} />
           
           <TrustRow />
+          
+          <BurkiniObjectionSection />
           
           <InfoAccordions product={product} />
         </div>

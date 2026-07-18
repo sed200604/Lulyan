@@ -14,7 +14,7 @@ export function AnimatedSection({ children, className = '', delay = 0 }: Animate
     <motion.div
       initial="initial"
       whileInView="animate"
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, margin: "100px" }}
       variants={animations.fadeUp}
       transition={{ ...animations.fadeUp.transition, delay }}
       className={className}

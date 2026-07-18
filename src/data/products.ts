@@ -419,6 +419,17 @@ export const products: Product[] = [
       { src: '/images/products/Produit-7/ebb23dd4-1390-487f-b4a1-53fc4803f017.webp', alt: 'Profil' },
       { src: '/images/products/Produit-7/fe77cc13-f247-4225-929d-93cb733f03af.webp', alt: 'Detail' },
     ],
+    media: [
+      { type: 'image', src: '/images/products/Produit-7/1.webp',       alt: 'Pois Élégance Noir — vue de face' },
+      { type: 'image', src: '/products/pois-elegance-noir-water.jpg',      alt: 'Pois Élégance Noir porté dans l\'eau' },
+      { type: 'image', src: '/products/pois-elegance-noir-walking.jpg',    alt: 'Pois Élégance Noir en mouvement au bord de piscine' },
+      { type: 'image', src: '/products/pois-elegance-noir-side.jpg',       alt: 'Pois Élégance Noir — vue de profil' },
+      { type: 'image', src: '/products/pois-elegance-noir-back.jpg',       alt: 'Pois Élégance Noir — vue de dos' },
+      { type: 'image', src: '/products/pois-elegance-noir-fabric-dry.jpg', alt: 'Détail du tissu à pois — texture sèche' },
+      { type: 'image', src: '/products/pois-elegance-noir-fabric-wet.jpg', alt: 'Détail du tissu mouillé — reste opaque' },
+      { type: 'image', src: '/products/pois-elegance-noir-zipper.jpg',     alt: 'Détail de la fermeture éclair et col' },
+      { type: 'video', src: '/products/pois-elegance-noir.mp4',            posterSrc: '/products/pois-elegance-noir-video-poster.jpg', alt: 'Vidéo — Pois Élégance Noir en mouvement' },
+    ],
     description: 'Le classique réinventé. Ce burkini intégral à motif pois blanc sur noir offre une allure intemporelle et sophistiquée. La tunique à fermeture éclair avant et jupe portefeuille crée une silhouette flatteuse et féminine.',
     shortDescription: 'Burkini intégral noir à pois blancs, tunique zippée avec jupe portefeuille élégante.',
     features: [

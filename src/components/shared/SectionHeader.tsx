@@ -27,7 +27,7 @@ export function SectionHeader({
     <motion.div
       initial="initial"
       whileInView="animate"
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, margin: '100px' }}
       className={cn(
         'flex flex-col',
         align === 'center' ? 'items-center text-center' : 'items-start text-left',

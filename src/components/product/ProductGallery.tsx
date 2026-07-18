@@ -1,168 +1,138 @@
 'use client';
-
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ZoomIn } from 'lucide-react';
-import dynamic from 'next/dynamic';
-import { ProductImage } from '@/types/product';
 
-const Lightbox = dynamic(() => import('@/components/product/Lightbox'), { ssr: false });
+type Media = {
+  type: 'image' | 'video';
+  src: string;
+  posterSrc?: string;  // for video
+  alt: string;
+  blurDataURL?: string;
+};
 
-interface ProductGalleryProps {
-  images: ProductImage[];
-  productName: string;
-}
+type Props = { media: Media[]; productName: string };
 
-export function ProductGallery({ images, productName }: ProductGalleryProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+export function ProductGallery({ media, productName }: Props) {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
-  
-  const totalImages = images.length;
 
-  // Handle mobile scroll sync with dots
   const handleScroll = () => {
-    if (!scrollRef.current) return;
-    const scrollPosition = scrollRef.current.scrollLeft;
-    const width = scrollRef.current.clientWidth;
-    const newIndex = Math.round(scrollPosition / width);
-    if (newIndex !== currentIndex) {
-      setCurrentIndex(newIndex);
-    }
+    const el = scrollRef.current;
+    if (!el) return;
+    const idx = Math.round(el.scrollLeft / el.offsetWidth);
+    setActiveIdx(idx);
   };
 
-  const scrollToIndex = (index: number) => {
-    setCurrentIndex(index);
-    if (scrollRef.current) {
-      const width = scrollRef.current.clientWidth;
-      scrollRef.current.scrollTo({
-        left: width * index,
-        behavior: 'smooth'
-      });
-    }
+  const scrollTo = (idx: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.scrollTo({ left: idx * el.offsetWidth, behavior: 'smooth' });
+    setActiveIdx(idx);
   };
 
   return (
     <div className="w-full">
-      {/* ─── DESKTOP GALLERY ─── */}
-      <div className="hidden md:flex gap-4">
-        {/* Thumbnails (Vertical) */}
-        <div className="flex flex-col gap-4 w-[80px] flex-shrink-0 max-h-[800px] overflow-y-auto scrollbar-hide">
-          {images.map((img, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentIndex(i)}
-              className={`relative w-[80px] h-[107px] transition-all duration-300 border-2 ${
-                i === currentIndex ? 'border-brand-gold-500' : 'border-transparent hover:border-brand-gold-500/50'
-              }`}
-              aria-label={`Vue ${i + 1}`}
-            >
-              <Image
-                src={img.src}
-                alt={`Miniature ${i + 1}`}
-                fill
-                className="object-cover"
-                sizes="80px"
-              />
-            </button>
-          ))}
-        </div>
-
-        {/* Main Image */}
-        <div 
-          className="relative flex-1 bg-neutral-50 cursor-zoom-in group overflow-hidden"
-          onClick={() => setIsLightboxOpen(true)}
-        >
-          <div className="aspect-[3/4] relative w-full">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                initial={currentIndex === 0 ? false : { opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="absolute inset-0"
+      {/* Main slider — swipe on mobile, click on desktop */}
+      <div
+        ref={scrollRef}
+        onScroll={handleScroll}
+        className="w-full aspect-[4/5] overflow-x-auto snap-x snap-mandatory flex scrollbar-none bg-neutral-50"
+        style={{ scrollBehavior: 'smooth' }}
+      >
+        {media.map((m, i) => (
+          <div key={i} className="min-w-full h-full snap-center relative">
+            {m.type === 'image' ? (
+              <button
+                type="button"
+                onClick={() => setLightboxOpen(true)}
+                className="w-full h-full cursor-zoom-in"
+                aria-label={`Voir ${m.alt} en grand`}
               >
                 <Image
-                  src={images[currentIndex]?.src || ''}
-                  alt={`${productName} - vue ${currentIndex + 1}`}
+                  src={m.src}
+                  alt={m.alt}
                   fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 55vw"
-                  priority={currentIndex === 0}
-                  loading={currentIndex === 0 ? 'eager' : 'lazy'}
+                  sizes="(max-width: 640px) 100vw, 60vw"
+                  priority={i === 0}          // LCP image only
+                  placeholder={m.blurDataURL ? 'blur' : 'empty'}
+                  blurDataURL={m.blurDataURL}
                   quality={85}
+                  className="object-cover"
                 />
-              </motion.div>
-            </AnimatePresence>
+              </button>
+            ) : (
+              <video
+                src={m.src}
+                poster={m.posterSrc}
+                muted
+                loop
+                playsInline
+                autoPlay={i === activeIdx}
+                controls
+                className="w-full h-full object-cover"
+                aria-label={m.alt}
+              />
+            )}
+
+            {/* Media badge (in-water / macro / video) */}
+            {m.type === 'video' && (
+              <div className="absolute top-4 left-4 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm text-white text-[10px] tracking-widest uppercase font-medium">
+                ▶ Vidéo
+              </div>
+            )}
           </div>
-          
-          {/* Hover Zoom Icon */}
-          <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-white/80 p-2 rounded-full backdrop-blur-sm">
-            <ZoomIn className="w-5 h-5 text-neutral-900" />
-          </div>
-        </div>
+        ))}
       </div>
 
-      {/* ─── MOBILE GALLERY ─── */}
-      <div className="md:hidden relative">
-        <div 
-          className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide"
-          ref={scrollRef}
-          onScroll={handleScroll}
-        >
-          {images.map((img, i) => (
-            <div 
-              key={i} 
-              className="w-full flex-shrink-0 snap-center relative aspect-[3/4]"
-              onDoubleClick={() => setIsLightboxOpen(true)}
-            >
-              <Image
-                src={img.src}
-                alt={`${productName} - vue ${i + 1}`}
-                fill
-                className="object-cover"
-                sizes="100vw"
-                priority={i === 0}
-                loading={i === 0 ? 'eager' : 'lazy'}
-                quality={85}
-              />
-            </div>
-          ))}
-        </div>
-        
-        {/* Counter badge */}
-        <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full">
-          <span className="text-white text-xs font-montserrat tracking-wider">
-            {String(currentIndex + 1).padStart(2, '0')} / {String(totalImages).padStart(2, '0')}
-          </span>
-        </div>
-        
-        {/* Dots */}
-        <div className="flex justify-center gap-2 mt-4">
-          {images.map((_, i) => (
+      {/* Progress dots + counter */}
+      <div className="flex items-center justify-between mt-3 px-1">
+        <div className="flex gap-1.5">
+          {media.map((_, i) => (
             <button
               key={i}
-              onClick={() => scrollToIndex(i)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                i === currentIndex 
-                  ? 'bg-brand-gold-500 w-6' 
-                  : 'bg-neutral-300'
+              onClick={() => scrollTo(i)}
+              aria-label={`Voir photo ${i + 1}`}
+              className={`h-1 rounded-full transition-all ${
+                i === activeIdx ? 'w-6 bg-[#2A2A2A]' : 'w-1.5 bg-neutral-300'
               }`}
-              aria-label={`Image ${i + 1}`}
             />
           ))}
         </div>
+        <p className="text-[11px] tabular-nums text-neutral-500">
+          {activeIdx + 1} / {media.length}
+        </p>
       </div>
 
-      {isLightboxOpen && (
-        <Lightbox 
-          images={images}
-          initialIndex={currentIndex}
-          onClose={() => setIsLightboxOpen(false)}
-        />
-      )}
+      {/* Thumbnail strip — desktop only */}
+      <div className="hidden lg:grid grid-cols-6 gap-2 mt-4">
+        {media.map((m, i) => (
+          <button
+            key={i}
+            onClick={() => scrollTo(i)}
+            aria-label={`Voir ${m.alt}`}
+            aria-current={i === activeIdx}
+            className={`relative aspect-square rounded overflow-hidden border-2 transition-all ${
+              i === activeIdx ? 'border-[#B8956A]' : 'border-transparent opacity-60 hover:opacity-100'
+            }`}
+          >
+            <Image
+              src={m.type === 'video' ? (m.posterSrc ?? '') : m.src}
+              alt={m.alt}
+              fill
+              sizes="120px"
+              className="object-cover"
+            />
+            {m.type === 'video' && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
+                  <path d="M6 4l10 6-10 6z" />
+                </svg>
+              </div>
+            )}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

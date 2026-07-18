@@ -9,6 +9,7 @@ export interface Product {
   compareAtPrice?: number;
   currency: string;
   images: ProductImage[];
+  media?: any[]; // For the new gallery
   category: ProductCategory;
   tags: string[];
   sizes: ProductSize[];
