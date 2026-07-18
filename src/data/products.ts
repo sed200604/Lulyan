@@ -251,10 +251,10 @@ export const products: Product[] = [
       { label: '48', value: '48', inStock: true },
     ],
     images: [
-      { src: '/images/products/product-4/Gemini_Generated_Image_19hd9p19hd9p19hd.webp', alt: 'Face' },
+      { src: '/images/products/product-4/photo 1.webp', alt: 'Face' },
       { src: '/images/products/product-4/Gemini_Generated_Image_afsslvafsslvafss.webp', alt: 'Dos' },
       { src: '/images/products/product-4/Gemini_Generated_Image_x3z814x3z814x3z8.webp', alt: 'Profil' },
-      { src: '/images/products/product-4/photo 1.webp', alt: 'Detail' },
+      { src: '/images/products/product-4/Gemini_Generated_Image_19hd9p19hd9p19hd.webp', alt: 'Detail' },
     ],
     description: 'La pièce maîtresse de LULIYANE RIVIERA. Un design sophistiqué avec des finitions dorées élégantes et un tissu de qualité supérieure. Pour celles qui veulent se démarquer avec style.',
     shortDescription: 'Ensemble maillot de bain modeste 3 pièces en tissu parachute, avec détails léopard et fermeture éclair à l\'avant.',
