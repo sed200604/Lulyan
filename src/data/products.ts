@@ -418,6 +418,8 @@ export const products: Product[] = [
       { src: '/images/products/Produit-7/4f9ecd28-d787-473f-b41a-cc3585a3b3a4.webp', alt: 'Dos' },
       { src: '/images/products/Produit-7/ebb23dd4-1390-487f-b4a1-53fc4803f017.webp', alt: 'Profil' },
       { src: '/images/products/Produit-7/fe77cc13-f247-4225-929d-93cb733f03af.webp', alt: 'Detail' },
+      { src: '/images/products/Produit-7/b9ddc059-bd4b-4d01-a162-cad282836c6b.png', alt: 'Vue supplémentaire 1' },
+      { src: '/images/products/Produit-7/e443052c-ed4a-4f66-b31e-838ba1ac84e9.png', alt: 'Vue supplémentaire 2' },
     ],
 
     description: 'Le classique réinventé. Ce burkini intégral à motif pois blanc sur noir offre une allure intemporelle et sophistiquée. La tunique à fermeture éclair avant et jupe portefeuille crée une silhouette flatteuse et féminine.',
