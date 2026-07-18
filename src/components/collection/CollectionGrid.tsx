@@ -27,7 +27,7 @@ export default function CollectionGrid({ products, onReset }: CollectionGridProp
   }
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 items-stretch">
       {products.map((product, i) => (
         <motion.div
           key={product.id}
@@ -35,6 +35,7 @@ export default function CollectionGrid({ products, onReset }: CollectionGridProp
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: i * 0.08, ease: [0.25, 0.1, 0, 1] }}
           layout
+          className="h-full"
         >
           <ProductCard product={product} />
         </motion.div>
