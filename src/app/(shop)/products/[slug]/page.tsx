@@ -116,7 +116,14 @@ export default function ProductPage({ params }: Props) {
             
             {/* Left: Gallery (55%) */}
             <div className="w-full md:w-[55%]">
-              <ProductGallery images={product.images} productName={product.name} />
+              <ProductGallery 
+                media={product.media || product.images.map(img => ({
+                  type: 'image',
+                  src: img.src,
+                  alt: img.alt
+                }))} 
+                productName={product.name} 
+              />
             </div>
 
             {/* Right: Info (45%) */}
