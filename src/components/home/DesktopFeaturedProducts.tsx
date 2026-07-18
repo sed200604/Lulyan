@@ -27,12 +27,12 @@ export function DesktopFeaturedProducts() {
         }}
         className="w-full max-w-7xl mx-auto"
       >
-        <div className="grid grid-cols-4 gap-6 pb-12 items-stretch">
+        <div className="grid grid-cols-4 gap-6 pb-12">
           {getFeaturedProducts().slice(0, 4).map((product) => (
             <motion.div
               key={product.id}
               variants={animations.fadeUp}
-              className="h-full"
+              className="w-auto"
             >
               <ProductCard product={product} />
             </motion.div>

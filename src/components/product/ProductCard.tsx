@@ -37,20 +37,16 @@ export function ProductCard({ product }: ProductCardProps) {
     }
   };
 
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault();
-    // TODO: Add to cart logic
-  };
-
   return (
     <motion.div
-      className="group relative flex flex-col w-full h-full"
+      className="group relative flex flex-col w-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Link href={`/products/${product.slug}`} className="w-full flex flex-col flex-grow">
+      <Link href={`/products/${product.slug}`} className="w-full">
         {/* Image Container */}
-        <div className="relative aspect-[3/4] w-full bg-brand-cream-100 overflow-hidden mb-4 rounded-sm">
+        <div className="relative aspect-[3/4] w-full bg-brand-cream-100 overflow-hidden mb-4 transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-medium">
+          {product.isGiftEligible && isGiftOfferActive() && <GiftEligibleBadge />}
           {/* Main Image */}
           <Image
             src={product.images[0].src}
@@ -81,29 +77,24 @@ export function ProductCard({ product }: ProductCardProps) {
             </div>
           )}
 
-          {/* Top Left Badges (Promo/New) */}
-          <div className="absolute top-3 left-3 flex flex-col gap-2 z-10">
-            {product.isGiftEligible && isGiftOfferActive() && (
-              <span className="bg-white/95 backdrop-blur-sm text-brand-black-900 font-medium text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-sm shadow-sm flex items-center gap-1">
-                <span>🎁</span> Hijab offert
-              </span>
-            )}
+          {/* Badges */}
+          <div className="absolute bottom-3 left-3 flex flex-col gap-2 z-10">
             {product.isNew && (
-              <span className="bg-brand-gold-500 text-white font-medium text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-sm shadow-sm w-fit">
+              <span className="bg-brand-gold-500 text-brand-black-950 font-accent text-[0.625rem] tracking-wider uppercase px-2 py-1">
                 Nouveau
               </span>
             )}
             {product.compareAtPrice && product.compareAtPrice > product.price && (
-              <span className="bg-[#D94F4F] text-white font-medium text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-sm shadow-sm w-fit">
+              <span className="bg-[#D94F4F] text-white font-accent text-[0.625rem] tracking-wider uppercase px-2 py-1">
                 -{Math.round((1 - product.price / product.compareAtPrice) * 100)}%
               </span>
             )}
           </div>
 
-          {/* Wishlist Button (Top Right) */}
+          {/* Wishlist Button */}
           <button
             onClick={handleWishlistClick}
-            className="absolute top-3 right-3 z-20 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm hover:scale-110 hover:bg-white transition-all"
+            className="absolute top-3 right-3 z-20 w-9 h-9 bg-white rounded-full flex items-center justify-center shadow-soft hover:scale-110 transition-transform"
             aria-label={isWishlisted ? "Retirer de la wishlist" : "Ajouter à la wishlist"}
           >
             <motion.div
@@ -120,42 +111,39 @@ export function ProductCard({ product }: ProductCardProps) {
             </motion.div>
           </button>
 
-          {/* Hover Actions (Desktop) */}
-          <div className="absolute bottom-0 left-0 w-full p-4 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out z-20 hidden md:flex flex-col gap-2 bg-gradient-to-t from-black/50 to-transparent">
-            <button 
-              onClick={handleAddToCart}
-              className="w-full bg-white text-brand-black-900 font-medium text-xs tracking-widest uppercase py-3 hover:bg-brand-black-900 hover:text-white transition-colors rounded-sm"
-            >
-              Ajouter au panier
-            </button>
-            <div className="w-full bg-transparent border border-white text-white font-medium text-xs tracking-widest uppercase py-3 text-center hover:bg-white hover:text-brand-black-900 transition-colors rounded-sm backdrop-blur-sm">
-              Aperçu rapide
-            </div>
-          </div>
+          {/* Quick View Bar */}
+          <AnimatePresence>
+            {isHovered && (
+              <motion.div
+                initial={{ y: '100%' }}
+                animate={{ y: 0 }}
+                exit={{ y: '100%' }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute bottom-0 left-0 w-full bg-white/90 backdrop-blur-sm py-3 text-center z-10"
+              >
+                <span className="font-accent text-overline text-brand-black-950 tracking-widest">
+                  APERÇU RAPIDE
+                </span>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Product Info */}
-        <div className="flex flex-col flex-grow items-start text-left">
-          {/* Overline / Brand */}
-          <span className="text-[10px] font-medium tracking-[0.15em] uppercase text-brand-black-400 mb-1">
-            Luliyane Riviera
+        <div className="flex flex-col items-center text-center mt-4">
+          <span className="text-[9px] font-montserrat tracking-[0.3em] uppercase text-brand-gold-500 mb-1.5">
+            LULIYANE RIVIERA
           </span>
-          
-          {/* Title */}
-          <h3 className="font-heading text-lg lg:text-xl text-brand-black-900 mb-1 leading-tight group-hover:text-brand-gold-500 transition-colors">
+          <h3 className="font-heading text-heading-3 text-brand-black-600 mb-1">
             {product.name}
           </h3>
-          
-          {/* Subtitle / Short Description */}
-          <p className="text-xs text-brand-black-500 mb-2 line-clamp-1 w-full">
-            {product.subtitle || product.shortDescription}
+          <p className="text-[10px] font-montserrat tracking-[0.2em] text-brand-black-400 mb-2 uppercase">
+            {product.subtitle}
           </p>
-          
-          {/* Price */}
-          <div className="mt-auto flex items-center gap-2 font-medium text-brand-black-900 text-sm md:text-base">
+          <div className="flex items-center gap-2 font-body text-body text-brand-black-600 font-semibold">
             <span>{product.price}€</span>
             {product.compareAtPrice && product.compareAtPrice > product.price && (
-              <span className="text-brand-black-400 line-through font-normal text-xs md:text-sm">
+              <span className="text-brand-black-300 line-through font-normal text-sm">
                 {product.compareAtPrice}€
               </span>
             )}
