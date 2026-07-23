@@ -61,11 +61,17 @@ export function fireMetaPixelEvent(eventName: string, data: any = {}, eventId?: 
 
 export function fireTikTokPixelEvent(eventName: string, data: any = {}) {
   if (typeof window !== 'undefined' && (window as any).ttq && typeof (window as any).ttq.track === 'function') {
-    // Map Meta event names to TikTok standard event names if needed
+    // Map Meta event names to TikTok standard event names
     let ttEvent = eventName;
     if (eventName === 'Purchase') ttEvent = 'CompletePayment';
-
+    if (eventName === 'CompleteRegistration') ttEvent = 'CompleteRegistration';
+    
     (window as any).ttq.track(ttEvent, data);
+
+    // Also trigger CompleteRegistration if registering via Lead or Subscribe event
+    if (eventName === 'Lead' || eventName === 'Subscribe') {
+      (window as any).ttq.track('CompleteRegistration', data);
+    }
   }
 }
 

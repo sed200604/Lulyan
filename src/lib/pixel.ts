@@ -204,6 +204,27 @@ export function trackPurchase({ orderId, totalAmount, items }: {
   });
 }
 
+export function trackCompleteRegistration({ contentName = 'Account', value = 0 }: {
+  contentName?: string;
+  value?: number;
+} = {}): void {
+  if (!hasConsent()) return;
+
+  // Meta Pixel
+  fbq('track', 'CompleteRegistration', {
+    content_name: contentName,
+    value: Number(value),
+    currency: CURRENCY,
+  });
+
+  // TikTok Pixel (CompleteRegistration standard event for TikTok Ads)
+  ttqTrack('CompleteRegistration', {
+    content_name: contentName,
+    value: Number(value),
+    currency: CURRENCY,
+  });
+}
+
 // ── internal helpers ─────────────────────────────────────────────────────────
 
 function genId(): string {
