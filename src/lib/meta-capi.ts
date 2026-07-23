@@ -59,6 +59,16 @@ export function fireMetaPixelEvent(eventName: string, data: any = {}, eventId?: 
   }
 }
 
+export function fireTikTokPixelEvent(eventName: string, data: any = {}) {
+  if (typeof window !== 'undefined' && (window as any).ttq && typeof (window as any).ttq.track === 'function') {
+    // Map Meta event names to TikTok standard event names if needed
+    let ttEvent = eventName;
+    if (eventName === 'Purchase') ttEvent = 'CompletePayment';
+
+    (window as any).ttq.track(ttEvent, data);
+  }
+}
+
 // Unified function to fire both Client and Server side
 export function trackEvent(eventName: string, data: Partial<CAPIEventParams> = {}, customUserData?: any, forcedEventId?: string) {
   if (typeof window === 'undefined' || !(window as any)._fbConsentGranted) return;
@@ -76,6 +86,7 @@ export function trackEvent(eventName: string, data: Partial<CAPIEventParams> = {
   delete clientData.event_source_url;
   
   fireMetaPixelEvent(eventName, clientData, eventId);
+  fireTikTokPixelEvent(eventName, clientData);
   
   sendCAPIEvent({
     event_name: eventName,
